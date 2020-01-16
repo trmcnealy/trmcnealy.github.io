@@ -1,5 +1,8 @@
 # [Timothy R. McNealy](https://trmcnealy.github.io)
-<a href="www.linkedin.com/in/timothyrmcnealy"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="32" height="32"></a>
+
+<a href="www.linkedin.com/in/timothyrmcnealy">
+	<img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="32" height="32">
+</a>
 
 [![Linkedin](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/trmcnealy/JupyterNotebooks/e5b8cb36f63d1b3153ec1f60988f1992e910c11e?urlpath=lab)
 
@@ -16,5 +19,5 @@
 
 ### Texas Oil Gas Production Query
 <a href="https://mybinder.org/v2/gh/trmcnealy/trmcnealy.github.io/master?filepath=Notebooks%2FTexasOilGasProduction.ipynb">
-	<img src="https://github.com/trmcnealy/JupyterNotebooks/blob/master/Notebooks/TexasOilGasProduction-Preview.png?raw=true" width="50%" height="50%">
+	<img src="https://github.com/trmcnealy/JupyterNotebooks/blob/master/Notebooks/TexasOilGasProduction.png?raw=true" width="100%" height="100%">
 </a>
