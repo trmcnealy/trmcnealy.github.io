@@ -17,6 +17,11 @@
 
 ## Jupyter Notebooks
 
+### VegaLite.NET
+<a href="https://mybinder.org/v2/gh/trmcnealy/trmcnealy.github.io/master?filepath=Notebooks%2FVegaLite.NETExamples.ipynb">
+	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/VegaLite.NETExamples.png" width="100%" height="100%">
+</a>
+
 ### Texas Oil Gas Production Query
 <a href="https://mybinder.org/v2/gh/trmcnealy/trmcnealy.github.io/master?filepath=Notebooks%2FTexasOilGasProduction.ipynb">
 	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/TexasOilGasProduction.png" width="100%" height="100%">
