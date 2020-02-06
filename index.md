@@ -29,7 +29,7 @@
 
 ### CppAstEditor
 <a href="https://github.com/trmcnealy/CppAstEditor">
-	<img src="https://raw.githubusercontent.com/trmcnealy/CppAstEditor/master/ScreenShotCodeEditors.png" width="50%" height="50%">
+	<img src="https://raw.githubusercontent.com/trmcnealy/CppAstEditor/master/ScreenShotCodeEditors.png" width="100%" height="100%">
 </a>
 
 
