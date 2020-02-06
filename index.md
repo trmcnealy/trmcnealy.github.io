@@ -1,4 +1,4 @@
-# [Timothy R. McNealy](https://trmcnealy.github.io)
+# [Timothy R. McNealy]("https://trmcnealy.github.io")
 
 <a href="www.linkedin.com/in/timothyrmcnealy">
 	<img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="32" height="32">
