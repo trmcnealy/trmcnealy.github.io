@@ -1,11 +1,11 @@
 # [Timothy R. McNealy]("https://trmcnealy.github.io")
 
+
+[![mybinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/trmcnealy/JupyterNotebooks/e5b8cb36f63d1b3153ec1f60988f1992e910c11e?urlpath=lab)
+
 <a href="www.linkedin.com/in/timothyrmcnealy">
 	<img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="32" height="32">
 </a>
-
-[![Linkedin](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/trmcnealy/JupyterNotebooks/e5b8cb36f63d1b3153ec1f60988f1992e910c11e?urlpath=lab)
-
 
 ## Nuget Packges
 
