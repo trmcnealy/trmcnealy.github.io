@@ -6,8 +6,8 @@ title: Projects
 ---
 # Nuget Packages
 
-## Kokkos.NET
-[![github](http://trmcnealy.github.io/assets/nindra.ico)](https://github.com/trmcnealy/Kokkos.NET)
+<a href="https://github.com/trmcnealy/Kokkos.NET"><h2>Kokkos.NET</h2></a>
+
 [![nuget](https://img.shields.io/nuget/v/Kokkos.NET.svg?style=flat-square)](https://www.nuget.org/packages/Kokkos.NET)
 
 ### native.Kokkos.NET
