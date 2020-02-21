@@ -6,7 +6,7 @@ title: Projects
 ---
 # Nuget Packages
 
-<a href="https://github.com/trmcnealy/Kokkos.NET"><h2>Kokkos.NET</h2></a>
+<h2><a href="https://github.com/trmcnealy/Kokkos.NET">Kokkos.NET</a></h2>
 
 [![nuget](https://img.shields.io/nuget/v/Kokkos.NET.svg?style=flat-square)](https://www.nuget.org/packages/Kokkos.NET)
 
