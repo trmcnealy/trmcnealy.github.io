@@ -14,10 +14,10 @@ title: Projects
 [![nuget](https://img.shields.io/nuget/v/native.Kokkos.NET.svg?style=flat-square)](https://www.nuget.org/packages/native.Kokkos.NET)
 
 
-## VegaLite.NET
+<h2><a href="https://github.com/trmcnealy/VegaLite.NET">VegaLite.NET</a></h2>
 [![nuget](https://img.shields.io/nuget/v/VegaLite.NET.svg?style=flat-square)](https://www.nuget.org/packages/VegaLite.NET)
 
-## OilGas.Data
+<h2><a href="https://github.com/trmcnealy/OilGas.Data">OilGas.Data</a></h2>
 [![nuget](https://img.shields.io/nuget/v/OilGas.Data.svg?style=flat-square)](https://www.nuget.org/packages/OilGas.Data)
 
 ---
