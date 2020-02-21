@@ -9,6 +9,13 @@
 
 ## Nuget Packges
 
+### Kokkos.NET
+[![nuget](https://img.shields.io/nuget/v/Kokkos.NET.svg?style=flat-square)](https://www.nuget.org/packages/Kokkos.NET)
+
+#### native.Kokkos.NET
+[![nuget](https://img.shields.io/nuget/v/native.Kokkos.NET.svg?style=flat-square)](https://www.nuget.org/packages/native.Kokkos.NET)
+
+
 ### VegaLite.NET
 [![nuget](https://img.shields.io/nuget/v/VegaLite.NET.svg?style=flat-square)](https://www.nuget.org/packages/VegaLite.NET)
 
