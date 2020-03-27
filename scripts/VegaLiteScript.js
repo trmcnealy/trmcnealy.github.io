@@ -116,21 +116,23 @@
     function GetVariable(variableName) {
 
         const scripts = document.getElementsByTagName("script");
-        var dotnet_script = "";
-
+        
         for (let script of scripts) {
             let status = script.getAttribute("data-requiremodule");
             if (status === "dotnet-interactive/dotnet-interactive") {
-                dotnet_script = script.src;
-                break;
+                const dotnet_script = script.src;
+
+                const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
+
+                clientGetVariable(rootUrl, variableName).then(function (csharpVariable) {
+                    if (csharpVariable !== null) {
+                        return csharpVariable;
+                    }
+                });
             }
         }
 
-        const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
-
-        clientGetVariable(rootUrl, variableName).then(function(csharpVariable) {
-            return csharpVariable;
-        });
+        return null;
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
