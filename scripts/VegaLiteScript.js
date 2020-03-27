@@ -131,11 +131,4 @@
             });
     }
 
-
 }(this);
-
-var runVegaLite = function () {
-    for (const key in VegaLiteScripts) {
-        VegaLiteScripts[key]();
-    }
-}
