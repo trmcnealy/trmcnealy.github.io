@@ -27,7 +27,8 @@
     }
 
     async function clientGetVariable(rootUrl, variable) {
-        let response = await clientFetch(rootUrl, `variables/csharp/${variable}`,
+        let response = await clientFetch(rootUrl,
+            `variables/csharp/${variable}`,
             {
                 method: "GET",
                 cache: "no-cache",
@@ -113,21 +114,28 @@
     function GetVariable(variableName) {
 
         const scripts = document.getElementsByTagName("script");
-        
-        for (let script of scripts) {
-            let status = script.getAttribute("data-requiremodule");
+
+        var csharpVariable = [];
+
+        for (const script of scripts) {
+            const status = script.getAttribute("data-requiremodule");
             if (status === "dotnet-interactive/dotnet-interactive") {
                 const dotnet_script = script.src;
 
                 const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
-                clientGetVariable(rootUrl, variableName).then(function (csharpVariable) {
-                    if (csharpVariable !== null) {
-                        return csharpVariable;
+                clientGetVariable(rootUrl, variableName).then(function(variable) {
+                    if (variable !== null) {
+                        csharpVariable = variable;
+                        break;
+                    } else {
+                        continue;
                     }
                 });
             }
         }
+
+        return csharpVariable;
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
