@@ -111,7 +111,7 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
-                interactive.csharp.getVariable(variableName).then(function (csharpVariable) {
+                global.interactive.csharp.getVariable(variableName).then(function (csharpVariable) {
 
                     renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function (result) {
 
