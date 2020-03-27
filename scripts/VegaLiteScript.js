@@ -128,7 +128,7 @@
 
     VegaLiteScript.requireVegaLiteWebgl = requireVegaLiteWebgl;
 
-    function requireVegaLiteSvg(id, vegalite_spec) {
+    var requireVegaLiteSvg = function(id, vegalite_spec) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
