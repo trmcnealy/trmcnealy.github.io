@@ -121,6 +121,8 @@
 
                 const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
+                console.log(rootUrl);
+
                 clientGetVariable(rootUrl, variableName).then(function (csharpVariable) {
                     if (csharpVariable !== null) {
                         return csharpVariable;
