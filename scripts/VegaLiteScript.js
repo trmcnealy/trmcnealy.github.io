@@ -1,6 +1,6 @@
 ﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
-!function (global, createDotnetInteractiveClient) {
+!function(global, createDotnetInteractiveClient) {
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -55,15 +55,6 @@
         return data;
     }
 
-    function updateViewDataId(view, id, variableName, csharpVariable, dataDims) {
-        try {
-            const data = copyDataToBuffer(id, csharpVariable, dataDims);
-            view.data(variableName, csharpVariable);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     function renderVegaLiteWebgl(id, vegalite_spec) {
         return (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) => {
 
@@ -102,50 +93,64 @@
         return dataDims;
     }
 
+    function GetVariable(variableName) {
+
+        const scripts = document.getElementsByTagName("script");
+        var dotnet_script = "";
+
+        for (let script of scripts) {
+            let status = script.getAttribute("data-requiremodule");
+            if (status === "dotnet-interactive/dotnet-interactive") {
+                dotnet_script = script.src;
+                break;
+            }
+        }
+
+        const address = dotnet_script.substring(0, dotnet_script.length - 31);
+
+        createDotnetInteractiveClient(address).then(function(interactive) {
+
+            interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
+                return csharpVariable;
+            });
+        });
+
+        return null;
+    }
+
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
 
         const dataDims = Dims(rows, columns);
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
-            function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
+            function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
-                const scripts = document.getElementsByTagName("script");
-                var dotnet_script = "";
+                renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
 
-                for (let script of scripts) {
-                    let status = script.getAttribute("data-requiremodule");
-                    if (status === "dotnet-interactive/dotnet-interactive") {
-                        dotnet_script = script.src;
-                        break;
-                    }
-                }
+                    const csharpVariable = GetVariable(variableName);
 
-                const address = dotnet_script.substring(0, dotnet_script.length - 31);
+                    console.log(csharpVariable);
 
-                createDotnetInteractiveClient(address).then(function (interactive) {
+                    const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
-                    interactive.csharp.getVariable(variableName).then(function (csharpVariable) {
+                    console.log(data);
 
-                        renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function (result) {
+                    result.view.data(variableName, data);
 
-                            updateViewDataId(result.view, id, variableName, csharpVariable, dataDims);
-
-                        });
-
-                    });
-
+                    console.log(result.view);
                 });
+
             });
-    }
-    
+    };
+
     RequireVegaLiteSvg = function(id, vegalite_spec) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
-            function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
+            function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
                 renderVegaLiteSvg(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then();
 
             });
-    }
+    };
 
 }(this, window.createDotnetInteractiveClient);
