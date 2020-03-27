@@ -58,7 +58,7 @@
     function updateViewDataId(view, id, variableName, csharpVariable, dataDims) {
         try {
             const data = copyDataToBuffer(id, csharpVariable, dataDims);
-            view.data(variableName, data);
+            view.data(variableName, csharpVariable);
         } catch (err) {
             console.log(err);
         }
@@ -110,7 +110,7 @@
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
                 const scripts = document.getElementsByTagName("script");
-                var dotnet_script;
+                var dotnet_script = "";
 
                 for (let script of scripts) {
                     let status = script.getAttribute("data-requiremodule");
