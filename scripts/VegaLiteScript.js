@@ -1,26 +1,5 @@
 ﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl, VegaLiteScripts;
 
-var runVegaLite = function() {
-    for (const key in VegaLiteScripts) {
-        VegaLiteScripts[key]();
-    }
-}
-
-if ((typeof (requirejs) !== typeof (Function)) ||
-    (typeof (requirejs.config) !== typeof (Function))) {
-
-    var script = document.createElement("script");
-    script.setAttribute("type", "text/javascript");
-    script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
-    script.onload = function () {
-        runVegaLite();
-    };
-    document.getElementsByTagName("head")[0].appendChild(script);
-}
-else {
-    runVegaLite();
-}
-
 !function (global) {
 
     VegaLiteScripts = {};
@@ -154,3 +133,9 @@ else {
 
 
 }(this);
+
+var runVegaLite = function () {
+    for (const key in VegaLiteScripts) {
+        VegaLiteScripts[key]();
+    }
+}
