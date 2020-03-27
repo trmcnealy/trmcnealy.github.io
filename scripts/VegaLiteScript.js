@@ -20,6 +20,26 @@
         return [...Array(rows).keys()].map(i => new Float32Array(columns));
     }
 
+    async function clientFetch(rootUrl, url, init) {
+        let address = url;
+        if (!address.startsWith("http")) {
+            address = `${rootUrl}${url}`;
+        }
+        let response = await fetch(address, init);
+        return response;
+    }
+
+    async function clientGetVariable(rootUrl, variable) {
+        let response = await clientFetch(rootUrl, `variables/csharp/${variable}`,
+            {
+                method: "GET",
+                cache: "no-cache",
+                mode: "cors"
+            });
+        let variableBundle = await response.json();
+        return variableBundle;
+    };
+
     function copyDataToBuffer(id, csharpVariable, dataDims) {
 
         const rows = dataDims.rows;
@@ -106,19 +126,11 @@
             }
         }
 
-        const address = dotnet_script.substring(0, dotnet_script.length - 31);
+        const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
-        var csharp_variable = {};
-
-        if (typeof createDotnetInteractiveClient === typeof Function) {
-            createDotnetInteractiveClient(address).then(function(interactive) {
-                interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
-                    csharp_variable = csharpVariable;
-                });
-            });
-        }
-
-        return csharp_variable;
+        clientGetVariable(rootUrl, variableName).then(function(csharpVariable) {
+            return csharpVariable;
+        });
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
