@@ -109,13 +109,10 @@
         const address = dotnet_script.substring(0, dotnet_script.length - 31);
 
         createDotnetInteractiveClient(address).then(function(interactive) {
-
             interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
                 return csharpVariable;
             });
         });
-
-        return null;
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
