@@ -20,15 +20,8 @@
         return [...Array(rows).keys()].map(i => new Float32Array(columns));
     }
 
-    async function clientFetch(rootUrl, url, init) {
-        let address = `${rootUrl}${url}`;
-        let response = await fetch(address, init);
-        return response;
-    }
-
     async function clientGetVariable(rootUrl, variable) {
-        let response = await clientFetch(rootUrl,
-            `variables/csharp/${variable}`,
+        let response = await fetch(`${rootUrl}variables/csharp/${variable}`,
             {
                 method: "GET",
                 cache: "no-cache",
@@ -111,11 +104,9 @@
         return dataDims;
     }
 
-    function GetVariable(variableName) {
+    async function GetVariable(variableName) {
 
         const scripts = document.getElementsByTagName("script");
-
-        var csharpVariable = [];
 
         for (const script of scripts) {
             const status = script.getAttribute("data-requiremodule");
@@ -124,17 +115,17 @@
 
                 const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
-                clientGetVariable(rootUrl, variableName).then(function(variable) {
-                    csharpVariable = variable;
+                let csharpVariable = await clientGetVariable(rootUrl, variableName).then(function (variable) {
+                    return variable;
                 });
 
                 if (csharpVariable !== null) {
-                    break;
+                    return csharpVariable;
                 }
             }
         }
 
-        return csharpVariable;
+        return [];
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
@@ -146,17 +137,18 @@
 
                 renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
 
-                    const csharpVariable = GetVariable(variableName);
+                    GetVariable(variableName).then((csharpVariable) => {
 
-                    console.log(csharpVariable);
+                        console.log(csharpVariable);
 
-                    const data = copyDataToBuffer(id, csharpVariable, dataDims);
+                        const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
-                    console.log(data);
+                        console.log(data);
 
-                    result.view.data(variableName, data);
+                        result.view.data(variableName, data);
 
-                    console.log(result.view);
+                        console.log(result.view);
+                    });
                 });
 
             });
