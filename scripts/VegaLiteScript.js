@@ -1,8 +1,6 @@
-﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl, VegaLiteScripts;
+﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
 !function (global) {
-
-    VegaLiteScripts = {};
 
     let vega_require = global.requirejs.config({
         context: "vega",
