@@ -94,16 +94,19 @@
         };
     }
 
+    function Dims(rows, columns) {
+
+        const dataDims = {
+            "rows": rows,
+            "columns": columns
+        };
+
+        return dataDims;
+    }
+
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
 
-        class DataDim {
-            constructor(rows, columns) {
-                this.rows = rows;
-                this.columns = columns;
-            }
-        }
-
-        const dataDims = new DataDim(rows, columns);
+        const dataDims = Dims(rows, columns);
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
