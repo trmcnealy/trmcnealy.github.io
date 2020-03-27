@@ -1,6 +1,6 @@
 ﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
-!function(global, createDotnetInteractiveClient) {
+!function(global) {
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -168,4 +168,4 @@
             });
     };
 
-}(this, window.createDotnetInteractiveClient);
+}(this);
