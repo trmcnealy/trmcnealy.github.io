@@ -141,10 +141,9 @@
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
-                        //result.view.data(variableName, data);
-                        console.log(result.view._runtime);
+                        result.view.data(variableName, csharpVariable);
 
-                        result.view._runtime.data[variableName].values = data;
+                        //result.view._runtime.data[variableName].values = data;
 
                     });
                 });
