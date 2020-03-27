@@ -122,16 +122,12 @@
                 const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
                 clientGetVariable(rootUrl, variableName).then(function (csharpVariable) {
-                    console.log(csharpVariable);
                     if (csharpVariable !== null) {
-                        console.log(csharpVariable);
                         return csharpVariable;
                     }
                 });
             }
         }
-
-        return null;
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
