@@ -139,15 +139,13 @@
 
                     GetVariable(variableName).then((csharpVariable) => {
 
-                        console.log(csharpVariable);
-
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
-                        console.log(data);
+                        //result.view.data(variableName, data);
+                        console.log(result.view._runtime);
 
-                        result.view.data(variableName, data);
+                        result.view._runtime.data[variableName].values = data;
 
-                        console.log(result.view);
                     });
                 });
 
