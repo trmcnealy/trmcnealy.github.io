@@ -109,15 +109,18 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
-                var dotnet_script = document.getElementsByAttribute("data-requiremodule", "dotnet-interactive/dotnet-interactive")[0];
+                const scripts = document.getElementsByTagName("script");
+                var dotnet_script;
 
-                console.log(dotnet_script);
+                for (let script of scripts) {
+                    let status = script.getAttribute("data-requiremodule");
+                    if (status === "dotnet-interactive/dotnet-interactive") {
+                        dotnet_script = script.src;
+                        break;
+                    }
+                }
 
                 var address = dotnet_script.src.substring(0, dotnet_script.src.length - 31);
-
-                console.log(address);
-
-                //http://192.168.1.141:21630/resources/dotnet-interactive.js
 
                 createDotnetInteractiveClient(address).then(function (interactive) {
 
