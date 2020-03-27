@@ -108,11 +108,17 @@
 
         const address = dotnet_script.substring(0, dotnet_script.length - 31);
 
-        createDotnetInteractiveClient(address).then(function(interactive) {
-            interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
-                return csharpVariable;
+        var csharp_variable = {};
+
+        if (typeof window.createDotnetInteractiveClient === typeof Function) {
+            createDotnetInteractiveClient(address).then(function(interactive) {
+                interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
+                    csharp_variable = csharpVariable;
+                });
             });
-        });
+        }
+
+        return csharp_variable;
     }
 
     RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
