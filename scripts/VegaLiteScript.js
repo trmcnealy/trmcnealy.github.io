@@ -21,10 +21,7 @@
     }
 
     async function clientFetch(rootUrl, url, init) {
-        let address = url;
-        if (!address.startsWith("http")) {
-            address = `${rootUrl}${url}`;
-        }
+        let address = `${rootUrl}${url}`;
         let response = await fetch(address, init);
         return response;
     }
