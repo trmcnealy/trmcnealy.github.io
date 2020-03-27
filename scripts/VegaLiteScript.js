@@ -1,16 +1,29 @@
-﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
+﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl, VegaLiteScripts;
 
-(function () {
-    if ((typeof (requirejs) !== typeof (Function)) ||
-        (typeof (requirejs.config) !== typeof (Function))) {
-        var script = document.createElement("script");
-        script.setAttribute("type", "text/javascript");
-        script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
-        document.getElementsByTagName("head")[0].appendChild(script);
+var runVegaLite = function() {
+    for (const key in VegaLiteScripts) {
+        VegaLiteScripts[key]();
     }
-})();
+}
+
+if ((typeof (requirejs) !== typeof (Function)) ||
+    (typeof (requirejs.config) !== typeof (Function))) {
+
+    var script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
+    script.onload = function () {
+        runVegaLite();
+    };
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+else {
+    runVegaLite();
+}
 
 !function (global) {
+
+    VegaLiteScripts = {};
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -19,7 +32,8 @@
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
             "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
-            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
+            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer",
+            "dotnet-interactive": "http://192.168.1.141:15041/resources/dotnet-interactive.js"
         },
         map: {
             '*': { 'vega-scenegraph': "vega" }
@@ -137,5 +151,6 @@
 
             });
     }
+
 
 }(this);
