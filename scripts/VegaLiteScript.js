@@ -22,7 +22,6 @@
 
     async function clientFetch(rootUrl, url, init) {
         let address = `${rootUrl}${url}`;
-        console.log(address);
         let response = await fetch(address, init);
         return response;
     }
@@ -123,7 +122,9 @@
                 const rootUrl = dotnet_script.substring(0, dotnet_script.length - 31);
 
                 clientGetVariable(rootUrl, variableName).then(function (csharpVariable) {
+                    console.log(csharpVariable);
                     if (csharpVariable !== null) {
+                        console.log(csharpVariable);
                         return csharpVariable;
                     }
                 });
