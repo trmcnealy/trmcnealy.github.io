@@ -120,7 +120,7 @@
                     }
                 }
 
-                var address = dotnet_script.src.substring(0, dotnet_script.src.length - 31);
+                var address = dotnet_script.substring(0, dotnet_script.src.length - 31);
 
                 createDotnetInteractiveClient(address).then(function (interactive) {
 
