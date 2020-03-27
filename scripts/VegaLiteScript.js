@@ -1,4 +1,4 @@
-﻿var VegaLiteScript;
+﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
 !function (global) {
 
@@ -100,7 +100,7 @@
         };
     }
 
-    function requireVegaLiteWebgl(id, vegalite_spec, variableName, rows, columns) {
+    RequireVegaLiteWebgl = function(id, vegalite_spec, variableName, rows, columns) {
 
         class DataDim {
             constructor(rows, columns) {
@@ -125,10 +125,8 @@
                 });
             });
     }
-
-    VegaLiteScript.requireVegaLiteWebgl = requireVegaLiteWebgl;
-
-    var requireVegaLiteSvg = function(id, vegalite_spec) {
+    
+    RequireVegaLiteSvg = function(id, vegalite_spec) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
@@ -137,7 +135,5 @@
 
             });
     }
-
-    VegaLiteScript.requireVegaLiteSvg = requireVegaLiteSvg;
 
 }(this);
