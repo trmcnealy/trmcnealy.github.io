@@ -1,6 +1,6 @@
 ﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
-!function (global, interactive_csharp) {
+!function (global, createDotnetInteractiveClient) {
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -109,11 +109,25 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
 
-                interactive_csharp.getVariable(variableName).then(function (csharpVariable) {
+                var dotnet_script = document.getElementsByAttribute("data-requiremodule", "dotnet-interactive/dotnet-interactive")[0];
 
-                    renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function (result) {
+                console.log(dotnet_script);
 
-                        updateViewDataId(result.view, id, variableName, csharpVariable, dataDims);
+                var address = dotnet_script.src.substring(0, dotnet_script.src.length - 31);
+
+                console.log(address);
+
+                //http://192.168.1.141:21630/resources/dotnet-interactive.js
+
+                createDotnetInteractiveClient(address).then(function (interactive) {
+
+                    interactive.csharp.getVariable(variableName).then(function (csharpVariable) {
+
+                        renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function (result) {
+
+                            updateViewDataId(result.view, id, variableName, csharpVariable, dataDims);
+
+                        });
 
                     });
 
@@ -131,4 +145,4 @@
             });
     }
 
-}(this, interactive.csharp);
+}(this, window.createDotnetInteractiveClient);
