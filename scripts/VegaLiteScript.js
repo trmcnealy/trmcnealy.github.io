@@ -1,14 +1,16 @@
 ﻿var RequireVegaLiteSvg, RequireVegaLiteWebgl;
 
-!function (global) {
-
-    if ((typeof (global.requirejs) !== typeof (Function)) ||
-        (typeof (global.requirejs.config) !== typeof (Function))) {
+(function () {
+    if ((typeof (requirejs) !== typeof (Function)) ||
+        (typeof (requirejs.config) !== typeof (Function))) {
         var script = document.createElement("script");
         script.setAttribute("type", "text/javascript");
         script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js");
         document.getElementsByTagName("head")[0].appendChild(script);
     }
+})();
+
+!function (global) {
 
     let vega_require = global.requirejs.config({
         context: "vega",
