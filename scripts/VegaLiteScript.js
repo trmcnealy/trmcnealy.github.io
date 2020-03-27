@@ -11,8 +11,7 @@
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
             "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
-            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer",
-            "dotnet-interactive": "http://192.168.1.141:15041/resources/dotnet-interactive.js"
+            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
         },
         map: {
             '*': { 'vega-scenegraph': "vega" }
