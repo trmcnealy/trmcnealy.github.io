@@ -110,7 +110,7 @@
 
         var csharp_variable = {};
 
-        if (typeof window.createDotnetInteractiveClient === typeof Function) {
+        if (typeof createDotnetInteractiveClient === typeof Function) {
             createDotnetInteractiveClient(address).then(function(interactive) {
                 interactive.csharp.getVariable(variableName).then(function(csharpVariable) {
                     csharp_variable = csharpVariable;
