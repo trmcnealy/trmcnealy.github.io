@@ -88,15 +88,7 @@
             });
         };
     }
-
-    async function renderVegaLiteWebgl(id, vegalite_spec) {
-        return await renderVegaLite(id, vegalite_spec, "webgl");
-    }
-
-    async function renderVegaLiteSvg(id, vegalite_spec) {
-        return await renderVegaLite(id, vegalite_spec, "svg");
-    }
-
+    
     function Dims(rows, columns) {
 
         const dataDims = { "rows": rows, "columns": columns };
@@ -144,7 +136,7 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-                renderVegaLiteWebgl(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
@@ -164,7 +156,7 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
             function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-                renderVegaLiteWebgl(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
+                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
