@@ -72,7 +72,7 @@
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
             var view = new vega.View(vega.parse(vgSpec))
-                .initialize("#vis-" + `${iD}`)
+                .initialize(`#vis-${id}`)
                 .renderer('webgl');
 
             return { "view": view };
@@ -89,7 +89,7 @@
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
             var view = new vega.View(vega.parse(vgSpec))
-                .initialize("#vis-" + `${iD}`)
+                .initialize(`#vis-${id}`)
                 .renderer('svg');
 
             return { "view": view };
