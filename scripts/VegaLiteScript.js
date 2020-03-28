@@ -74,7 +74,8 @@
             var view = new vega.View(vega.parse(vgSpec))
                 .logLevel(vega.Error)
                 .initialize(`#vis-${id}`)
-                .renderer(view_render);
+                .renderer(view_render)
+                .hover();
 
             window["vega"] = vega;
             window["vegaLite"] = vegaLite;
