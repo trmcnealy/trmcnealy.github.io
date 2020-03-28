@@ -26,12 +26,12 @@ title: Projects
 
 ## VegaLite.NET
 <a href="https://mybinder.org/v2/gh/trmcnealy/JupyterNotebooks/master?filepath=VegaLite.NETExamples.ipynb">
-	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/VegaLite.NETExamples.png" width="100%" height="100%">
+	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/Images/VegaLite.NETExamples.png" width="100%" height="100%">
 </a>
 
 ## Texas Oil Gas Production Query
 <a href="https://mybinder.org/v2/gh/trmcnealy/JupyterNotebooks/master?filepath=TexasOilGasProduction.ipynb">
-	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/TexasOilGasProduction.png" width="100%" height="100%">
+	<img src="https://raw.githubusercontent.com/trmcnealy/JupyterNotebooks/master/Notebooks/Images/TexasOilGasProduction.png" width="100%" height="100%">
 </a>
 
 ---
