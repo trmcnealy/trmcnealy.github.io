@@ -59,8 +59,8 @@
         return data;
     }
 
-    async function renderVegaLite(id, vegalite_spec, view_render) {
-        return (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) => {
+    function renderVegaLite(id, vegalite_spec, view_render) {
+        return async (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
