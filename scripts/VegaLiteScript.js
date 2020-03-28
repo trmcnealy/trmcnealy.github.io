@@ -81,14 +81,16 @@
             //window["vegaEmbed"] = vegaEmbed;
             window["vegaWebgl"] = vegaWebgl;
 
-            return new Promise({
-                view: view,
-                spec: vlSpec,
-                vgSpec: vgSpec
-            });
+            return new Promise((function*() {
+                return {
+                    view: view,
+                    spec: vlSpec,
+                    vgSpec: vgSpec
+                }
+            }));
         };
     }
-    
+
     function Dims(rows, columns) {
 
         const dataDims = { "rows": rows, "columns": columns };
