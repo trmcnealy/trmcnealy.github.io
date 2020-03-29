@@ -1,6 +1,6 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-!function (global) {
+!function(global) {
     //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -8,9 +8,9 @@
             "d3-color": "https://d3js.org/d3-color.v1.min",
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
+            "vega-webgl": "https://cdn.jsdelivr.net/npm/vega-webgl-renderer?noext",
             "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
-            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
-            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
+            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
     });
@@ -63,7 +63,6 @@
     //TODO
     //https://github.com/apache/arrow/tree/master/js
 
-
     function renderVegaLite(id, vegalite_spec, view_render) {
         return async(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) => {
             const vlSpec = vegalite_spec;
@@ -74,7 +73,9 @@
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
 
-            vega.formats('arrow', vegaLoaderArrow);
+            vegaLite.vega.formats("arrow", await require("vega-loader-arrow@0.0.6"));
+
+            vegaLite.vega.formats("arrow", vegaLoaderArrow);
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
@@ -96,7 +97,7 @@
                     view: view,
                     spec: vlSpec,
                     vgSpec: vgSpec
-                }
+                };
             }));
         };
     }
@@ -134,7 +135,7 @@
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
         vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
 
                     global["view"] = result.view;
@@ -147,7 +148,7 @@
     RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
         vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
@@ -167,7 +168,7 @@
         const dataDims = Dims(rows, columns);
 
         vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
                 renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
@@ -198,5 +199,5 @@
     //        });
     //};
 
-    VegaLiteLoaded = new Event('vega-lite-loaded');
+    VegaLiteLoaded = new Event("vega-lite-loaded");
 }(this);
