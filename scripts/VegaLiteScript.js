@@ -7,9 +7,10 @@
             "d3-color": "https://d3js.org/d3-color.v1.min",
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
-            "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
-            "vega-webgl":
-                "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
+            //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
+            "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
+            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
+            "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
     });
@@ -59,8 +60,12 @@
         return data;
     }
 
+    //TODO
+    //https://github.com/apache/arrow/tree/master/js
+
+
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async (d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) => {
+        return async(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -68,6 +73,8 @@
             //    logLevel: vegaEmbed.Info
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
+
+            vega.formats('arrow', vegaLoaderArrow);
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
@@ -80,6 +87,8 @@
             window["vega"] = vega;
             window["vegaLite"] = vegaLite;
             //window["vegaEmbed"] = vegaEmbed;
+            window["apacheArrow"] = apacheArrow;
+            window["vegaLoaderArrow"] = vegaLoaderArrow;
             window["vegaWebgl"] = vegaWebgl;
 
             return new Promise((function*() {
@@ -124,9 +133,9 @@
     }
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
-        vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
-            function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
+            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
 
                     global["view"] = result.view;
 
@@ -137,9 +146,9 @@
 
     RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
-            function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
+            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
@@ -157,9 +166,9 @@
 
         const dataDims = Dims(rows, columns);
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"],
-            function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
+            function (d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
+                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
