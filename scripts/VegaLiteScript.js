@@ -73,7 +73,7 @@
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
             
-            vegaLite.vega.formats("arrow", vegaLoaderArrow);
+            vega.formats("arrow", vegaLoaderArrow);
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
