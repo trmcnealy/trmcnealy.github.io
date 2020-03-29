@@ -1,7 +1,7 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
 !function(global) {
-    //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
+    //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
     let vega_require = global.requirejs.config({
         context: "vega",
         paths: {
@@ -72,9 +72,7 @@
             //    logLevel: vegaEmbed.Info
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
-
-            vegaLite.vega.formats("arrow", await require("vega-loader-arrow@0.0.6"));
-
+            
             vegaLite.vega.formats("arrow", vegaLoaderArrow);
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
