@@ -1,13 +1,13 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-!function(global) {
+!function (global) {
+    //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
     let vega_require = global.requirejs.config({
         context: "vega",
         paths: {
             "d3-color": "https://d3js.org/d3-color.v1.min",
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
-            //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed?noext",
             "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
             "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
             "vega-webgl": "https://unpkg.com/vega-webgl-renderer/build/vega-webgl-renderer"
