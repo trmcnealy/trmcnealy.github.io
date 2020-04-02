@@ -1,6 +1,10 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-!function (global) {
+(function (global, factory) {
+    typeof exports === 'object' &&
+        typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' &&
+            define.amd ? define(['exports'], factory) : (factory("undefined" != typeof window && window === a ? a : "undefined" != typeof global && null != global ? global : this));
+}(this, (function (exports) {
 
     //https://www.jsdelivr.com/package/npm/vega?path=src
     const vegaVersion = "5.10.0";
@@ -93,31 +97,31 @@
                 .hover();
 
             if (vega) {
-                global["vega"] = vega;
+                exports["vega"] = vega;
             } else {
                 console.log("vega was not loaded.");
             }
 
             if (vegaLite) {
-                global["vegaLite"] = vegaLite;
+                exports["vegaLite"] = vegaLite;
             } else {
                 console.log("vegaLite was not loaded.");
             }
 
             if (vegaWebgl) {
-                global["vegaWebgl"] = vegaWebgl;
+                exports["vegaWebgl"] = vegaWebgl;
             } else {
                 console.log("vegaWebgl was not loaded.");
             }
 
             if (apacheArrow) {
-                global["apacheArrow"] = apacheArrow;
+                exports["apacheArrow"] = apacheArrow;
             } else {
                 console.log("apacheArrow was not loaded.");
             }
 
             if (vegaLoaderArrow) {
-                global["vegaLoaderArrow"] = vegaLoaderArrow;
+                exports["vegaLoaderArrow"] = vegaLoaderArrow;
             } else {
                 console.log("vegaLoaderArrow was not loaded.");
             }
@@ -219,4 +223,4 @@
     };
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
-}(this);
+}.bind(this))));
