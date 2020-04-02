@@ -1,5 +1,4 @@
-﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
-
+﻿
 (function (global, factory) {
     typeof exports === 'object' &&
         typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' &&
@@ -167,7 +166,7 @@
         return [];
     }
 
-    RequireVegaLite = function(id, vegalite_spec, view_render) {
+    exports.RequireVegaLite = function(id, vegalite_spec, view_render) {
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
@@ -179,7 +178,7 @@
             });
     };
 
-    RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
+    exports.RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
@@ -197,7 +196,7 @@
             });
     };
 
-    RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
+    exports.RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
 
         const dataDims = Dims(rows, columns);
 
@@ -222,5 +221,6 @@
             });
     };
 
-    VegaLiteLoaded = new Event("vega-lite-loaded");
+    exports.VegaLiteLoaded = new Event("vega-lite-loaded");
+
 }.bind(this))));
