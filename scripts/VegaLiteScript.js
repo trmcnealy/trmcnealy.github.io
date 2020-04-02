@@ -93,31 +93,31 @@
                 .hover();
 
             if (vega) {
-                global["vega"] = vega;
+                window["vega"] = vega;
             } else {
                 console.log("vega was not loaded.");
             }
 
             if (vegaLite) {
-                global["vegaLite"] = vegaLite;
+                window["vegaLite"] = vegaLite;
             } else {
                 console.log("vegaLite was not loaded.");
             }
 
             if (vegaWebgl) {
-                global["vegaWebgl"] = vegaWebgl;
+                window["vegaWebgl"] = vegaWebgl;
             } else {
                 console.log("vegaWebgl was not loaded.");
             }
 
             if (apacheArrow) {
-                global["apacheArrow"] = apacheArrow;
+                window["apacheArrow"] = apacheArrow;
             } else {
                 console.log("apacheArrow was not loaded.");
             }
 
             if (vegaLoaderArrow) {
-                global["vegaLoaderArrow"] = vegaLoaderArrow;
+                window["vegaLoaderArrow"] = vegaLoaderArrow;
             } else {
                 console.log("vegaLoaderArrow was not loaded.");
             }
@@ -168,7 +168,7 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
-                    global["view"] = result.view;
+                    window["view"] = result.view;
 
                     result.view.run();
                 });
@@ -185,7 +185,7 @@
                         //result.view.data(variableName, csharpVariable);
                         result.view.insert(variableName, csharpVariable);
 
-                        global["view"] = result.view;
+                        window["view"] = result.view;
 
                         result.view.run();
                     });
@@ -210,7 +210,7 @@
 
                         result.view.insert(variableName, data);
 
-                        global["view"] = result.view;
+                        window["view"] = result.view;
 
                         result.view.run();
                     });
