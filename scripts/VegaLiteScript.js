@@ -163,6 +163,15 @@
                     window["view"] = result.view;
 
                     result.view.run();
+
+                    return {
+                        d3Color: d3Color,
+                        vega: vega,
+                        vegaLite: vegaLite,
+                        vegaWebgl: vegaWebgl,
+                        apacheArrow: apacheArrow,
+                        vegaLoaderArrow: vegaLoaderArrow
+                    };
                 });
             });
     };
@@ -180,6 +189,15 @@
                         window["view"] = result.view;
 
                         result.view.run();
+
+                        return {
+                            d3Color: d3Color,
+                            vega: vega,
+                            vegaLite: vegaLite,
+                            vegaWebgl: vegaWebgl,
+                            apacheArrow: apacheArrow,
+                            vegaLoaderArrow: vegaLoaderArrow
+                        };
                     });
                 });
             });
@@ -205,6 +223,15 @@
                         window["view"] = result.view;
 
                         result.view.run();
+
+                        return {
+                            d3Color: d3Color,
+                            vega: vega,
+                            vegaLite: vegaLite,
+                            vegaWebgl: vegaWebgl,
+                            apacheArrow: apacheArrow,
+                            vegaLoaderArrow: vegaLoaderArrow
+                        };
                     });
                 });
             });
