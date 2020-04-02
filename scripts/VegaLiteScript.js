@@ -184,7 +184,9 @@
                 _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
 
-        return _libraries;
+        return new Promise((function* () {
+            return _libraries;
+        }));
     };
 
     RequireVegaLiteData = async function (id, vegalite_spec, view_render, variableName) {
@@ -206,7 +208,9 @@
                 _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
 
-        return _libraries;
+        return new Promise((function* () {
+            return _libraries;
+        }));
     };
 
     RequireVegaLiteDataBuffered = async function (id, vegalite_spec, variableName, rows, columns) {
@@ -233,7 +237,10 @@
                 });
                 _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
-        return _libraries;
+
+        return new Promise((function* () {
+            return _libraries;
+        }));
     };
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
