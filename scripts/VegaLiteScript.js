@@ -1,7 +1,19 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-!function(global) {
-    //"vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+!function (global) {
+
+    //https://www.jsdelivr.com/package/npm/vega?path=src
+    const vegaVersion = "5.10.0";
+
+    //https://www.jsdelivr.com/package/npm/vega-lite?path=src
+    const vegaLiteVersion = "4.8.1";
+
+    //https://www.jsdelivr.com/package/npm/vega-embed?path=src
+    const vegaEmbedVersion = "6.5.2";
+
+    //https://www.jsdelivr.com/package/npm/vega-webgl-renderer
+    const vegaWebglRendererVersion = "1.0.0-beta.2";
+
     let vega_require = global.requirejs.config({
         context: "vega",
         paths: {
@@ -60,11 +72,8 @@
         return data;
     }
 
-    //TODO
-    //https://github.com/apache/arrow/tree/master/js
-
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) => {
+        return async (d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -79,16 +88,16 @@
 
             var view = new vega.View(vega.parse(vgSpec))
                 .logLevel(vega.Error)
-                .initialize(`#vis-${id}`)
+                .initialize("#vis-" + `${id}`)
                 .renderer(view_render)
                 .hover();
 
-            window["vega"] = vega;
-            window["vegaLite"] = vegaLite;
-            //window["vegaEmbed"] = vegaEmbed;
-            window["apacheArrow"] = apacheArrow;
-            window["vegaLoaderArrow"] = vegaLoaderArrow;
-            window["vegaWebgl"] = vegaWebgl;
+            global["vega"] = vega;
+            global["vegaLite"] = vegaLite;
+            //global["vegaEmbed"] = vegaEmbed;
+            global["apacheArrow"] = apacheArrow;
+            global["vegaLoaderArrow"] = vegaLoaderArrow;
+            global["vegaWebgl"] = vegaWebgl;
 
             return new Promise((function*() {
                 return {
@@ -132,9 +141,9 @@
     }
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
-        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
                     global["view"] = result.view;
 
@@ -145,9 +154,9 @@
 
     RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
@@ -165,9 +174,9 @@
 
         const dataDims = Dims(rows, columns);
 
-        vega_require(["d3-color", "vega", "vega-lite", "apache-arrow", "vega-loader-arrow", "vega-webgl"],
-            function(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl) {
-                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, apacheArrow, vegaLoaderArrow, vegaWebgl).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
@@ -185,17 +194,6 @@
                 });
             });
     };
-
-    //RequireVegaLiteSvg = function(id, vegalite_spec) {
-    //    vega_require(["d3-color", "vega", "vega-lite", "vega-embed", "vega-webgl"], function(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl) {
-    //            renderVegaLiteSvg(id, vegalite_spec)(d3Color, vega, vegaLite, vegaEmbed, vegaWebgl).then(function(result) {
-    //
-    //                global["view"] = result.view;
-    //
-    //                result.view.run();
-    //            });
-    //        });
-    //};
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
 }(this);
