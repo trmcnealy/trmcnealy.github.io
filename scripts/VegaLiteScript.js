@@ -191,7 +191,7 @@
                     GetVariable(variableName).then((csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
-                        result.view.insert(variableName, csharpVariable);
+                        result.view.data(variableName, csharpVariable);
 
                         result.view.run();
 
@@ -229,7 +229,7 @@
                         // result.view._runtime.data[variableName].values = data;
                         // result.view.data(variableName, data);
 
-                        result.view.insert(variableName, data);
+                        result.view.data(variableName, data);
 
                         result.view.run();
 
