@@ -171,7 +171,7 @@
 
     RequireVegaLite = async function (id, vegalite_spec, view_render) {
 
-        return new Promise((function* () {
+        return new Promise((async function* () {
 
             var _libraries;
 
