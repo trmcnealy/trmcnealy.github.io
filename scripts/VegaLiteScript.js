@@ -1,22 +1,18 @@
-﻿
-!function (global, factory) {
-    "object" == typeof exports &&
-    "undefined" != typeof module ? factory(exports) : "function" == typeof define &&
-                                                      define.amd ? define(["exports"], factory) : factory(global);
-}(this, (function (exports) {
-    "use strict";
+﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-    ////https://www.jsdelivr.com/package/npm/vega?path=src
-    //const vegaVersion = "5.10.0";
+! function (global) {
 
-    ////https://www.jsdelivr.com/package/npm/vega-lite?path=src
-    //const vegaLiteVersion = "4.8.1";
+    //https://www.jsdelivr.com/package/npm/vega?path=src
+    const vegaVersion = "5.10.0";
 
-    ////https://www.jsdelivr.com/package/npm/vega-embed?path=src
-    //const vegaEmbedVersion = "6.5.2";
+    //https://www.jsdelivr.com/package/npm/vega-lite?path=src
+    const vegaLiteVersion = "4.8.1";
 
-    ////https://www.jsdelivr.com/package/npm/vega-webgl-renderer
-    //const vegaWebglRendererVersion = "1.0.0-beta.2";
+    //https://www.jsdelivr.com/package/npm/vega-embed?path=src
+    const vegaEmbedVersion = "6.5.2";
+
+    //https://www.jsdelivr.com/package/npm/vega-webgl-renderer
+    const vegaWebglRendererVersion = "1.0.0-beta.2";
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -97,31 +93,31 @@
                 .hover();
 
             if (vega) {
-                exports["vega"] = vega;
+                global["vega"] = vega;
             } else {
                 console.log("vega was not loaded.");
             }
 
             if (vegaLite) {
-                exports["vegaLite"] = vegaLite;
+                global["vegaLite"] = vegaLite;
             } else {
                 console.log("vegaLite was not loaded.");
             }
 
             if (vegaWebgl) {
-                exports["vegaWebgl"] = vegaWebgl;
+                global["vegaWebgl"] = vegaWebgl;
             } else {
                 console.log("vegaWebgl was not loaded.");
             }
 
             if (apacheArrow) {
-                exports["apacheArrow"] = apacheArrow;
+                global["apacheArrow"] = apacheArrow;
             } else {
                 console.log("apacheArrow was not loaded.");
             }
 
             if (vegaLoaderArrow) {
-                exports["vegaLoaderArrow"] = vegaLoaderArrow;
+                global["vegaLoaderArrow"] = vegaLoaderArrow;
             } else {
                 console.log("vegaLoaderArrow was not loaded.");
             }
@@ -167,7 +163,7 @@
         return [];
     }
 
-    exports.RequireVegaLite = function(id, vegalite_spec, view_render) {
+    RequireVegaLite = function(id, vegalite_spec, view_render) {
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
@@ -179,7 +175,7 @@
             });
     };
 
-    exports.RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
+    RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
@@ -197,7 +193,7 @@
             });
     };
 
-    exports.RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
+    RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
 
         const dataDims = Dims(rows, columns);
 
@@ -222,6 +218,6 @@
             });
     };
 
-    exports.VegaLiteLoaded = new Event("vega-lite-loaded");
+    VegaLiteLoaded = new Event("vega-lite-loaded");
 
-}.bind(this)));
+}("undefined" != typeof window && window === this ? this : "undefined" != typeof global && null != global ? global : this);
