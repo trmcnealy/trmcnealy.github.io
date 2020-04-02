@@ -1,4 +1,4 @@
-﻿var Libraries, RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
+﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
 !function(global) {
 
@@ -166,16 +166,14 @@
                     result.view.run();
                 });
 
-                if ("undefined" !== Libraries) {
-                    Libraries = {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
-                    };
-                }
+                RequireVegaLite.Libraries = {
+                    "d3Color": d3Color,
+                    "vega": vega,
+                    "vegaLite": vegaLite,
+                    "vegaWebgl": vegaWebgl,
+                    "apacheArrow": apacheArrow,
+                    "vegaLoaderArrow": vegaLoaderArrow
+                };
 
             });
     };
@@ -196,16 +194,14 @@
                     });
                 });
 
-                if ("undefined" !== Libraries) {
-                    Libraries = {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
-                    };
-                }
+                RequireVegaLiteData.Libraries = {
+                    "d3Color": d3Color,
+                    "vega": vega,
+                    "vegaLite": vegaLite,
+                    "vegaWebgl": vegaWebgl,
+                    "apacheArrow": apacheArrow,
+                    "vegaLoaderArrow": vegaLoaderArrow
+                };
 
             });
 
@@ -234,16 +230,14 @@
                     });
                 });
 
-                if ("undefined" !== Libraries) {
-                    Libraries = {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
-                    };
-                }
+                RequireVegaLiteDataBuffered.Libraries = {
+                    "d3Color": d3Color,
+                    "vega": vega,
+                    "vegaLite": vegaLite,
+                    "vegaWebgl": vegaWebgl,
+                    "apacheArrow": apacheArrow,
+                    "vegaLoaderArrow": vegaLoaderArrow
+                };
 
             });
 
