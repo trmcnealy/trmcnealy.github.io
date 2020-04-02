@@ -1,6 +1,6 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-! function (global) {
+!function (global) {
 
     //https://www.jsdelivr.com/package/npm/vega?path=src
     const vegaVersion = "5.10.0";
@@ -81,7 +81,11 @@
             //    logLevel: vegaEmbed.Info
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
-            
+
+            if ("undefined" !== vega.formats.arrow) {
+                console.log("vega.formats.arrow was loaded.");
+            }
+
             vega.formats("arrow", vegaLoaderArrow);
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
@@ -92,31 +96,33 @@
                 .renderer(view_render)
                 .hover();
 
-            if (vega) {
+
+
+            if ("undefined" !== vega) {
                 window["vega"] = vega;
             } else {
                 console.log("vega was not loaded.");
             }
 
-            if (vegaLite) {
+            if ("undefined" !== vegaLite) {
                 window["vegaLite"] = vegaLite;
             } else {
                 console.log("vegaLite was not loaded.");
             }
 
-            if (vegaWebgl) {
+            if ("undefined" !== vegaWebgl) {
                 window["vegaWebgl"] = vegaWebgl;
             } else {
                 console.log("vegaWebgl was not loaded.");
             }
 
-            if (apacheArrow) {
+            if ("undefined" !== apacheArrow) {
                 window["apacheArrow"] = apacheArrow;
             } else {
                 console.log("apacheArrow was not loaded.");
             }
 
-            if (vegaLoaderArrow) {
+            if ("undefined" !== vegaLoaderArrow) {
                 window["vegaLoaderArrow"] = vegaLoaderArrow;
             } else {
                 console.log("vegaLoaderArrow was not loaded.");
