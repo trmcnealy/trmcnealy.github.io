@@ -72,14 +72,6 @@
         return data;
     }
 
-    function loadGlobalVariable(name, variable) {
-        if (variable) {
-            global[name] = variable;
-        } else {
-            console.log(`${name} was not loaded.`);
-        }
-    }
-
     function renderVegaLite(id, vegalite_spec, view_render) {
         return async (d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
             const vlSpec = vegalite_spec;
@@ -100,11 +92,35 @@
                 .renderer(view_render)
                 .hover();
 
-            loadGlobalVariable("vega", vega);
-            loadGlobalVariable("vegaLite", vegaLite);
-            loadGlobalVariable("vegaWebgl", vegaWebgl);
-            loadGlobalVariable("apacheArrow", apacheArrow);
-            loadGlobalVariable("vegaLoaderArrow", vegaLoaderArrow);
+            if (vega) {
+                global["vega"] = vega;
+            } else {
+                console.log("vega was not loaded.");
+            }
+
+            if (vegaLite) {
+                global["vegaLite"] = vegaLite;
+            } else {
+                console.log("vegaLite was not loaded.");
+            }
+
+            if (vegaWebgl) {
+                global["vegaWebgl"] = vegaWebgl;
+            } else {
+                console.log("vegaWebgl was not loaded.");
+            }
+
+            if (apacheArrow) {
+                global["apacheArrow"] = apacheArrow;
+            } else {
+                console.log("apacheArrow was not loaded.");
+            }
+
+            if (vegaLoaderArrow) {
+                global["vegaLoaderArrow"] = vegaLoaderArrow;
+            } else {
+                console.log("vegaLoaderArrow was not loaded.");
+            }
 
             return new Promise((function*() {
                 return {
