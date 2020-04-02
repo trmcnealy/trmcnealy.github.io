@@ -155,7 +155,7 @@
         return [];
     }
 
-    RequireVegaLite = function(id, vegalite_spec, view_render) {
+    RequireVegaLite = async function(id, vegalite_spec, view_render) {
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
@@ -167,7 +167,7 @@
             });
     };
 
-    RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
+    RequireVegaLiteData = async function(id, vegalite_spec, view_render, variableName) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
@@ -185,7 +185,7 @@
             });
     };
 
-    RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
+    RequireVegaLiteDataBuffered = async function(id, vegalite_spec, variableName, rows, columns) {
 
         const dataDims = Dims(rows, columns);
 
