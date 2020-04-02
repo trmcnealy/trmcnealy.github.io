@@ -1,21 +1,22 @@
 ﻿
-(function (global, factory) {
-    typeof exports === 'object' &&
-        typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' &&
-            define.amd ? define(['exports'], factory) : (factory("undefined" != typeof window && window === a ? a : "undefined" != typeof global && null != global ? global : this));
+! function (global, factory) {
+    "object" == typeof exports &&
+    "undefined" != typeof module ? factory(exports) : "function" == typeof define &&
+                                                      define.amd ? define(["exports"], factory) : factory(global = global || {});
 }(this, (function (exports) {
+    "use strict";
 
-    //https://www.jsdelivr.com/package/npm/vega?path=src
-    const vegaVersion = "5.10.0";
+    ////https://www.jsdelivr.com/package/npm/vega?path=src
+    //const vegaVersion = "5.10.0";
 
-    //https://www.jsdelivr.com/package/npm/vega-lite?path=src
-    const vegaLiteVersion = "4.8.1";
+    ////https://www.jsdelivr.com/package/npm/vega-lite?path=src
+    //const vegaLiteVersion = "4.8.1";
 
-    //https://www.jsdelivr.com/package/npm/vega-embed?path=src
-    const vegaEmbedVersion = "6.5.2";
+    ////https://www.jsdelivr.com/package/npm/vega-embed?path=src
+    //const vegaEmbedVersion = "6.5.2";
 
-    //https://www.jsdelivr.com/package/npm/vega-webgl-renderer
-    const vegaWebglRendererVersion = "1.0.0-beta.2";
+    ////https://www.jsdelivr.com/package/npm/vega-webgl-renderer
+    //const vegaWebglRendererVersion = "1.0.0-beta.2";
 
     let vega_require = global.requirejs.config({
         context: "vega",
@@ -223,4 +224,4 @@
 
     exports.VegaLiteLoaded = new Event("vega-lite-loaded");
 
-}.bind(this))));
+}.bind(this)));
