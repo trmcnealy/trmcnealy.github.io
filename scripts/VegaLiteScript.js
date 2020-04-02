@@ -220,4 +220,4 @@
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
 
-}("undefined" != typeof window && window === this ? this : "undefined" != typeof global && null != global ? global : this);
+}("undefined" != typeof window ? window : this);
