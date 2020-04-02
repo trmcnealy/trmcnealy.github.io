@@ -1,6 +1,6 @@
 ﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
-!function (global) {
+!function(global) {
 
     //https://www.jsdelivr.com/package/npm/vega?path=src
     const vegaVersion = "5.10.0";
@@ -82,11 +82,29 @@
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
 
-            if ("undefined" !== vega.formats.arrow) {
-                console.log("vega.formats.arrow was loaded.");
+            if ("undefined" === vega.formats.arrow) {
+                vega.formats("arrow", vegaLoaderArrow);
             }
 
-            vega.formats("arrow", vegaLoaderArrow);
+            if ("undefined" !== vega) {
+                window["vega"] = vega;
+            }
+
+            if ("undefined" !== vegaLite) {
+                window["vegaLite"] = vegaLite;
+            }
+
+            if ("undefined" !== vegaWebgl) {
+                window["vegaWebgl"] = vegaWebgl;
+            }
+
+            if ("undefined" !== apacheArrow) {
+                window["apacheArrow"] = apacheArrow;
+            }
+
+            if ("undefined" !== vegaLoaderArrow) {
+                window["vegaLoaderArrow"] = vegaLoaderArrow;
+            }
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
@@ -95,43 +113,6 @@
                 .initialize("#vis-" + `${id}`)
                 .renderer(view_render)
                 .hover();
-
-
-
-            if ("undefined" !== vega) {
-                window["vega"] = vega;
-                console.log("vega was loaded.");
-            } else {
-                console.log("vega was not loaded.");
-            }
-
-            if ("undefined" !== vegaLite) {
-                window["vegaLite"] = vegaLite;
-                console.log("vegaLite was loaded.");
-            } else {
-                console.log("vegaLite was not loaded.");
-            }
-
-            if ("undefined" !== vegaWebgl) {
-                window["vegaWebgl"] = vegaWebgl;
-                console.log("vegaWebgl was loaded.");
-            } else {
-                console.log("vegaWebgl was not loaded.");
-            }
-
-            if ("undefined" !== apacheArrow) {
-                window["apacheArrow"] = apacheArrow;
-                console.log("apacheArrow was loaded.");
-            } else {
-                console.log("apacheArrow was not loaded.");
-            }
-
-            if ("undefined" !== vegaLoaderArrow) {
-                window["vegaLoaderArrow"] = vegaLoaderArrow;
-                console.log("vegaLoaderArrow was loaded.");
-            } else {
-                console.log("vegaLoaderArrow was not loaded.");
-            }
 
             return new Promise((function*() {
                 return {
