@@ -172,12 +172,14 @@
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow
+                        }
                     }
                 ));
 
@@ -202,12 +204,14 @@
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow
+                        }
                     }
                 ));
 
@@ -239,12 +243,14 @@
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
-                        "d3Color": d3Color,
-                        "vega": vega,
-                        "vegaLite": vegaLite,
-                        "vegaWebgl": vegaWebgl,
-                        "apacheArrow": apacheArrow,
-                        "vegaLoaderArrow": vegaLoaderArrow
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow
+                        }
                     }
                 ));
 
