@@ -21,7 +21,7 @@
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
             "vega-webgl": "https://cdn.jsdelivr.net/npm/vega-webgl-renderer?noext",
-            "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
+            "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow/Arrow.es2015.min",
             "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
