@@ -1,4 +1,4 @@
-﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
+﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded, VegaLiteRendered;
 
 !function(global) {
 
@@ -155,9 +155,13 @@
         return [];
     }
 
-    RequireVegaLite = async function(id, vegalite_spec, view_render) {
+    VegaLiteLoaded = new Event("vega-lite-loaded");
 
-        return vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+    VegaLiteRendered = new Event("vega-lite-rendered");
+
+    RequireVegaLite = function(id, vegalite_spec, view_render) {
+
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
@@ -166,21 +170,23 @@
                     result.view.run();
                 });
 
-                RequireVegaLite.Libraries = {
-                    "d3Color": d3Color,
-                    "vega": vega,
-                    "vegaLite": vegaLite,
-                    "vegaWebgl": vegaWebgl,
-                    "apacheArrow": apacheArrow,
-                    "vegaLoaderArrow": vegaLoaderArrow
-                };
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        "d3Color": d3Color,
+                        "vega": vega,
+                        "vegaLite": vegaLite,
+                        "vegaWebgl": vegaWebgl,
+                        "apacheArrow": apacheArrow,
+                        "vegaLoaderArrow": vegaLoaderArrow
+                    }
+                ));
 
             });
     };
 
-    RequireVegaLiteData = async function(id, vegalite_spec, view_render, variableName) {
+    RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
-        return vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
@@ -194,24 +200,25 @@
                     });
                 });
 
-                RequireVegaLiteData.Libraries = {
-                    "d3Color": d3Color,
-                    "vega": vega,
-                    "vegaLite": vegaLite,
-                    "vegaWebgl": vegaWebgl,
-                    "apacheArrow": apacheArrow,
-                    "vegaLoaderArrow": vegaLoaderArrow
-                };
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        "d3Color": d3Color,
+                        "vega": vega,
+                        "vegaLite": vegaLite,
+                        "vegaWebgl": vegaWebgl,
+                        "apacheArrow": apacheArrow,
+                        "vegaLoaderArrow": vegaLoaderArrow
+                    }
+                ));
 
             });
-
     };
 
-    RequireVegaLiteDataBuffered = async function(id, vegalite_spec, variableName, rows, columns) {
+    RequireVegaLiteDataBuffered = function(id, vegalite_spec, variableName, rows, columns) {
 
         const dataDims = Dims(rows, columns);
 
-        return vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
@@ -230,19 +237,18 @@
                     });
                 });
 
-                RequireVegaLiteDataBuffered.Libraries = {
-                    "d3Color": d3Color,
-                    "vega": vega,
-                    "vegaLite": vegaLite,
-                    "vegaWebgl": vegaWebgl,
-                    "apacheArrow": apacheArrow,
-                    "vegaLoaderArrow": vegaLoaderArrow
-                };
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        "d3Color": d3Color,
+                        "vega": vega,
+                        "vegaLite": vegaLite,
+                        "vegaWebgl": vegaWebgl,
+                        "apacheArrow": apacheArrow,
+                        "vegaLoaderArrow": vegaLoaderArrow
+                    }
+                ));
 
             });
-
     };
-
-    VegaLiteLoaded = new Event("vega-lite-loaded");
 
 }("undefined" != typeof window ? window : this);
