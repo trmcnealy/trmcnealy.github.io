@@ -170,21 +170,24 @@
     }
 
     RequireVegaLite = async function (id, vegalite_spec, view_render) {
-        var _libraries;
-
-        await vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
-
-                    window["view"] = result.view;
-
-                    result.view.run();
-                });
-
-                _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
-            });
 
         return new Promise((function* () {
+
+            var _libraries;
+
+            await vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+                async function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                    renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+
+                        window["view"] = result.view;
+
+                        result.view.run();
+                    });
+
+                    _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
+                });
+
+        
             return _libraries;
         }));
     };
