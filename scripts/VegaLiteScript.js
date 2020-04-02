@@ -100,30 +100,35 @@
 
             if ("undefined" !== vega) {
                 window["vega"] = vega;
+                console.log("vega was loaded.");
             } else {
                 console.log("vega was not loaded.");
             }
 
             if ("undefined" !== vegaLite) {
                 window["vegaLite"] = vegaLite;
+                console.log("vegaLite was loaded.");
             } else {
                 console.log("vegaLite was not loaded.");
             }
 
             if ("undefined" !== vegaWebgl) {
                 window["vegaWebgl"] = vegaWebgl;
+                console.log("vegaWebgl was loaded.");
             } else {
                 console.log("vegaWebgl was not loaded.");
             }
 
             if ("undefined" !== apacheArrow) {
                 window["apacheArrow"] = apacheArrow;
+                console.log("apacheArrow was loaded.");
             } else {
                 console.log("apacheArrow was not loaded.");
             }
 
             if ("undefined" !== vegaLoaderArrow) {
                 window["vegaLoaderArrow"] = vegaLoaderArrow;
+                console.log("vegaLoaderArrow was loaded.");
             } else {
                 console.log("vegaLoaderArrow was not loaded.");
             }
