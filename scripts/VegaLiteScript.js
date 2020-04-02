@@ -131,6 +131,20 @@
         return dataDims;
     }
 
+    function Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+
+        const libraries = {
+            "d3Color": d3Color,
+            "vega": vega,
+            "vegaLite": vegaLite,
+            "vegaWebgl": vegaWebgl,
+            "apacheArrow": apacheArrow,
+            "vegaLoaderArrow": vegaLoaderArrow
+        };
+
+        return libraries;
+    }
+
     async function GetVariable(variableName) {
 
         const scripts = document.getElementsByTagName("script");
@@ -155,28 +169,26 @@
         return [];
     }
 
-    RequireVegaLite = async function(id, vegalite_spec, view_render) {
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+    RequireVegaLite = async function (id, vegalite_spec, view_render) {
+        var _libraries;
+
+        await vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
                     window["view"] = result.view;
 
                     result.view.run();
-
-                    return {
-                        d3Color: d3Color,
-                        vega: vega,
-                        vegaLite: vegaLite,
-                        vegaWebgl: vegaWebgl,
-                        apacheArrow: apacheArrow,
-                        vegaLoaderArrow: vegaLoaderArrow
-                    };
                 });
+
+                _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
+
+        return _libraries;
     };
 
-    RequireVegaLiteData = async function(id, vegalite_spec, view_render, variableName) {
+    RequireVegaLiteData = async function (id, vegalite_spec, view_render, variableName) {
+        var _libraries;
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
@@ -189,22 +201,16 @@
                         window["view"] = result.view;
 
                         result.view.run();
-
-                        return {
-                            d3Color: d3Color,
-                            vega: vega,
-                            vegaLite: vegaLite,
-                            vegaWebgl: vegaWebgl,
-                            apacheArrow: apacheArrow,
-                            vegaLoaderArrow: vegaLoaderArrow
-                        };
                     });
                 });
+                _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
+
+        return _libraries;
     };
 
-    RequireVegaLiteDataBuffered = async function(id, vegalite_spec, variableName, rows, columns) {
-
+    RequireVegaLiteDataBuffered = async function (id, vegalite_spec, variableName, rows, columns) {
+        var _libraries;
         const dataDims = Dims(rows, columns);
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
@@ -223,18 +229,11 @@
                         window["view"] = result.view;
 
                         result.view.run();
-
-                        return {
-                            d3Color: d3Color,
-                            vega: vega,
-                            vegaLite: vegaLite,
-                            vegaWebgl: vegaWebgl,
-                            apacheArrow: apacheArrow,
-                            vegaLoaderArrow: vegaLoaderArrow
-                        };
                     });
                 });
+                _libraries = Libraries(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
             });
+        return _libraries;
     };
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
