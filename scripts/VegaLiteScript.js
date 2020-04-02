@@ -1,8 +1,8 @@
 ﻿
-! function (global, factory) {
+!function (global, factory) {
     "object" == typeof exports &&
     "undefined" != typeof module ? factory(exports) : "function" == typeof define &&
-                                                      define.amd ? define(["exports"], factory) : factory(global = global || {});
+                                                      define.amd ? define(["exports"], factory) : factory(global);
 }(this, (function (exports) {
     "use strict";
 
