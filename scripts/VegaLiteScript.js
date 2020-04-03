@@ -22,7 +22,8 @@
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
             "vega-webgl": "https://cdn.jsdelivr.net/npm/vega-webgl-renderer?noext",
             "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
-            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext"
+            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
+            "vega-arrow-transforms":"https://trmcnealy.github.io/scripts/vega-arrow-transforms"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
     });
@@ -73,7 +74,7 @@
     }
 
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async (d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
+        return async(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -82,7 +83,11 @@
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
 
-            vega.formats("arrow", vegaLoaderArrow);
+            if ("undefined" !== vega && "undefined" !== vegaLoaderArrow) {
+                vega.formats("arrow", vegaLoaderArrow);
+            }
+
+            vegaArrowTransforms.register(vega);
 
             if ("undefined" !== vega) {
                 window["vega"] = vega;
@@ -159,9 +164,9 @@
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
 
                     result.view.run();
 
@@ -174,6 +179,7 @@
                                 "vegaWebgl": vegaWebgl,
                                 "apacheArrow": apacheArrow,
                                 "vegaLoaderArrow": vegaLoaderArrow,
+                                "vegaArrowTransforms": vegaArrowTransforms,
                                 "view": result.view
                             }
                         }
@@ -185,9 +191,9 @@
 
     RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
@@ -204,6 +210,7 @@
                                     "vegaWebgl": vegaWebgl,
                                     "apacheArrow": apacheArrow,
                                     "vegaLoaderArrow": vegaLoaderArrow,
+                                    "vegaArrowTransforms": vegaArrowTransforms,
                                     "view": result.view
                                 }
                             }
@@ -218,9 +225,9 @@
 
         const dataDims = Dims(rows, columns);
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
+                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
                     GetVariable(variableName).then((csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
@@ -242,6 +249,7 @@
                                     "vegaWebgl": vegaWebgl,
                                     "apacheArrow": apacheArrow,
                                     "vegaLoaderArrow": vegaLoaderArrow,
+                                    "vegaArrowTransforms": vegaArrowTransforms,
                                     "view": result.view
                                 }
                             }
@@ -253,3 +261,41 @@
     };
 
 }("undefined" != typeof window ? window : this);
+
+
+//function range(bind, el, param, value) {
+//    value = value !== undefined ? value : ((+param.max) + (+param.min)) / 2;
+//
+//    var max = param.max != null ? param.max : Math.max(100, +value) || 100,
+//        min = param.min || Math.min(0, max, +value) || 0,
+//        step = param.step || tickStep(min, max, 100);
+//
+//    var node = element('input', {
+//        type:  'range',
+//        name:  param.signal,
+//        min:   min,
+//        max:   max,
+//        step:  step
+//    });
+//    node.value = value;
+//
+//    var label = element('label', {}, +value);
+//
+//    el.appendChild(node);
+//    el.appendChild(label);
+//
+//    function update() {
+//        label.textContent = node.value;
+//        bind.update(+node.value);
+//    }
+//
+//    // subscribe to both input and change
+//    node.addEventListener('input', update);
+//    node.addEventListener('change', update);
+//
+//    bind.elements = [node];
+//    bind.set = function(value) {
+//        node.value = value;
+//        label.textContent = value;
+//    };
+//}
