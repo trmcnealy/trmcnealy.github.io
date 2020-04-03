@@ -18,6 +18,8 @@
         context: "vega",
         paths: {
             "d3-color": "https://d3js.org/d3-color.v1.min",
+            "vega-util": "https://cdn.jsdelivr.net/npm/vega-util?noext",
+            "vega-loader": "https://cdn.jsdelivr.net/npm/vega-loader?noext",
             "vega-dataflow": "https://cdn.jsdelivr.net/npm/vega-dataflow?noext",
             "vega": "https://cdn.jsdelivr.net/npm/vega?noext",
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
