@@ -91,7 +91,7 @@
             }
 
             if ("undefined" !== vega && "undefined" !== vegaArrowTransforms) {
-                vegaArrowTransforms.register(vega);
+                vega.transforms["arrow-transform"] = vegaArrowTransforms;
             }
 
             if ("undefined" !== vega) {
