@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vega'), require('apache-arrow')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'vega', 'apache-arrow'], factory) :
-    (global = global || self, factory((global.vega = global.vega || {}, global.vega.transforms = global.vega.transforms || {}, global.vega.transforms.arrow = {}), global.vega, global.apacheArrow));
-}(this, (function (exports, vega, apacheArrow) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('vega'), require('apache-arrow')) :
+    typeof define === 'function' && define.amd ? define(['vega', 'apache-arrow'], factory) :
+    (global = global || self, factory(global.vega, global.apacheArrow));
+}(this, (function (vega, apacheArrow) { 'use strict';
 
     // ReSharper disable TsResolvedFromInaccessibleModule
     // ReSharper disable QualifiedExpressionMaybeNull
@@ -15,25 +15,6 @@
             step((generator = generator.apply(thisArg, _arguments || [])).next());
         });
     };
-    //arrow.predicate.col('precipitation').eq(0)
-    class Slice {
-        constructor(begin, end) {
-            this._begin = begin;
-            this._end = end;
-        }
-        get begin() {
-            return this._begin;
-        }
-        set begin(value) {
-            this._begin = value;
-        }
-        get end() {
-            return this._end;
-        }
-        set end(value) {
-            this._end = value;
-        }
-    }
     //ArrowTransform.staticconstructor();
     //
     //export function register(Vega: any) {
@@ -58,9 +39,5 @@
     //        const row = rainfall.get(highIdx)
     //        return `${row.date} => ${row.precipitation} inches`
     //    }())
-
-    exports.Slice = Slice;
-
-    Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
