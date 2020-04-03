@@ -1,12 +1,11 @@
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vega-dataflow'), require('apache-arrow')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'vega-dataflow', 'apache-arrow'], factory) :
-    (global = global || self, factory((global.vega = global.vega || {}, global.vega.transforms = global.vega.transforms || {}, global.vega.transforms.arrow = {}), global.vegaDataflow, global.apacheArrow));
-}(this, (function (exports, vegaDataflow, apacheArrow) { 'use strict';
+this.vega = this.vega || {};
+this.vega.transforms = this.vega.transforms || {};
+this.vega.transforms.arrow = (function (exports, vega, apacheArrow) {
+    'use strict';
 
     // ReSharper disable TsResolvedFromInaccessibleModule
     // ReSharper disable QualifiedExpressionMaybeNull
-    var __awaiter = (window && window.__awaiter) || function (thisArg, _arguments, P, generator) {
+    var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
         function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
         return new (P || (P = Promise))(function (resolve, reject) {
             function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -18,8 +17,6 @@
     //arrow.predicate.col('precipitation').eq(0)
     class Slice {
         constructor(begin, end) {
-            this._begin = 0;
-            this._end = 0;
             this._begin = begin;
             this._end = end;
         }
@@ -36,11 +33,11 @@
             this._end = value;
         }
     }
-    class ArrowTransform extends vegaDataflow.Transform {
+    class ArrowTransform extends vega.Transform {
         constructor(params) {
             super([], params);
-            this._dataTable = null;
             this._definition = null;
+            this._value = null;
             this._definition = {
                 type: "ArrowTransform",
                 metadata: { changes: true, source: true },
@@ -53,7 +50,9 @@
                     { name: "slice", type: "param", "params": [{ name: "begin", type: "number" }, { name: "end", type: "number" }] }
                 ]
             };
-            vegaDataflow.definition(this);
+            if (!vega.transforms["ArrowTransform"]) {
+                vega.transforms["ArrowTransform"] = this;
+            }
         }
         get Table() {
             return this._dataTable;
@@ -74,6 +73,12 @@
         set Definition(value) {
             this._definition = value;
         }
+        get Value() {
+            return this._value;
+        }
+        set Value(value) {
+            this._value = value;
+        }
         transform(_, pulse) {
             return __awaiter(this, void 0, void 0, function* () {
                 if (!this._dataTable) {
@@ -86,28 +91,31 @@
                 let select = _.select;
                 let selectAt = _.selectAt;
                 let slice = _.slice;
-                let result = null;
+                let results = null;
                 if (filter) {
-                    result = yield this._dataTable.filter(filter);
+                    results = yield this._dataTable.filter(filter);
                 }
                 else if (getColumn) {
-                    result = yield this._dataTable.getColumn(getColumn);
+                    results = yield this._dataTable.getColumn(getColumn);
                 }
                 else if (getColumnAt) {
-                    result = yield this._dataTable.getColumnAt(getColumnAt);
+                    results = yield this._dataTable.getColumnAt(getColumnAt);
                 }
                 else if (select) {
-                    result = yield this._dataTable.select(select);
+                    results = yield this._dataTable.select(select);
                 }
                 else if (selectAt) {
-                    result = yield this._dataTable.selectAt(selectAt);
+                    results = yield this._dataTable.selectAt(selectAt);
                 }
                 else if (slice) {
-                    result = yield this._dataTable.slice(slice.get("begin"), slice.get("end"));
+                    results = yield this._dataTable.slice(slice.get("begin"), slice.get("end"));
                 }
-                result.forEach(vegaDataflow.ingest);
-                out.rem = vegaDataflow.Transform.value;
-                vegaDataflow.Transform.value = out.add = out.source = result;
+                //results.forEach(ingest);
+                for (var result in results) {
+                    vega.ingest(result);
+                }
+                out.rem = this._value;
+                this._value = out.add = out.source = results;
                 return out;
             });
         }
@@ -139,7 +147,6 @@
     exports.Slice = Slice;
     exports.register = register;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
+    return exports;
 
-})));
-//# sourceMappingURL=vega-arrow-transforms.js.map
+}({}, vega, apacheArrow));
