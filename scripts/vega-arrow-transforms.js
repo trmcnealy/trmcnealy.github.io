@@ -41,7 +41,7 @@
             super([], params);
             this._dataTable = null;
             this._definition = null;
-            vegaDataflow.definition({
+            this._definition = {
                 type: "ArrowTransform",
                 metadata: { changes: true, source: true },
                 params: [
@@ -52,7 +52,8 @@
                     { name: "selectAt", type: "number", "array": true },
                     { name: "slice", type: "param", "params": [{ name: "begin", type: "number" }, { name: "end", type: "number" }] }
                 ]
-            });
+            };
+            vegaDataflow.definition(this);
         }
         get Table() {
             return this._dataTable;
