@@ -123,8 +123,8 @@
         ;
     }
     function register(Vega) {
-        if ("undefined" !== Vega && !Vega.transforms["ArrowFilter"]) {
-            Vega.transforms["ArrowFilter"] = ArrowTransform;
+        if ("undefined" !== Vega && !Vega.transforms["ArrowTransform"]) {
+            Vega.transforms["ArrowTransform"] = ArrowTransform;
         }
     }
     // TODO
