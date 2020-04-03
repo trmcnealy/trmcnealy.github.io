@@ -34,99 +34,13 @@
             this._end = value;
         }
     }
-    class ArrowTransform extends vega.Transform {
-        constructor(params) {
-            super([], params);
-            this._definition = null;
-            this._value = null;
-            this._definition = {
-                type: "ArrowTransform",
-                metadata: { changes: true, source: true },
-                params: [
-                    { name: "filter", type: "Predicate" },
-                    { name: "getColumn", type: "field" },
-                    { name: "getColumnAt", type: "number" },
-                    { name: "select", type: "field", "array": true },
-                    { name: "selectAt", type: "number", "array": true },
-                    { name: "slice", type: "param", "params": [{ name: "begin", type: "number" }, { name: "end", type: "number" }] }
-                ]
-            };
-            if (!vega.transforms["ArrowTransform"]) {
-                vega.transforms["ArrowTransform"] = this;
-            }
-        }
-        get Table() {
-            return this._dataTable;
-        }
-        set Table(table_data) {
-            if (table_data instanceof apacheArrow.Table) {
-                this._dataTable = table_data;
-            }
-            if (table_data instanceof ArrayBuffer) {
-                table_data = new Uint8Array(table_data);
-                this._dataTable = apacheArrow.Table.from(Array.isArray(table_data) ? table_data : [table_data]);
-            }
-            this._dataTable = apacheArrow.Table.new(table_data);
-        }
-        get Definition() {
-            return this._definition;
-        }
-        set Definition(value) {
-            this._definition = value;
-        }
-        get Value() {
-            return this._value;
-        }
-        set Value(value) {
-            this._value = value;
-        }
-        transform(_, pulse) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!this._dataTable) {
-                    throw Error("ArrowTransform missing data Table.");
-                }
-                const out = pulse.fork(pulse.NO_FIELDS & pulse.NO_SOURCE);
-                let filter = _.filter;
-                let getColumn = _.getColumn;
-                let getColumnAt = _.getColumnAt;
-                let select = _.select;
-                let selectAt = _.selectAt;
-                let slice = _.slice;
-                let results = null;
-                if (filter) {
-                    results = yield this._dataTable.filter(filter);
-                }
-                else if (getColumn) {
-                    results = yield this._dataTable.getColumn(getColumn);
-                }
-                else if (getColumnAt) {
-                    results = yield this._dataTable.getColumnAt(getColumnAt);
-                }
-                else if (select) {
-                    results = yield this._dataTable.select(select);
-                }
-                else if (selectAt) {
-                    results = yield this._dataTable.selectAt(selectAt);
-                }
-                else if (slice) {
-                    results = yield this._dataTable.slice(slice.get("begin"), slice.get("end"));
-                }
-                //results.forEach(ingest);
-                for (var result in results) {
-                    vega.ingest(result);
-                }
-                out.rem = this._value;
-                this._value = out.add = out.source = results;
-                return out;
-            });
-        }
-        ;
-    }
-    function register(Vega) {
-        if ("undefined" !== Vega && !Vega.transforms["ArrowTransform"]) {
-            Vega.transforms["ArrowTransform"] = ArrowTransform;
-        }
-    }
+    //ArrowTransform.staticconstructor();
+    //
+    //export function register(Vega: any) {
+    //    if ("undefined" !== Vega && !Vega.transforms["arrow-transform"]) {
+    //        Vega.transforms["arrow-transform"] = ArrowTransform;
+    //    }
+    //}
     // TODO
     //Map 
     //    hours = (function () {
@@ -146,7 +60,6 @@
     //    }())
 
     exports.Slice = Slice;
-    exports.register = register;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
