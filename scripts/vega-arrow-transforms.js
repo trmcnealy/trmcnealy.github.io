@@ -1,7 +1,8 @@
-this.vega = this.vega || {};
-this.vega.transforms = this.vega.transforms || {};
-this.vega.transforms.arrow = (function (exports, vega, apacheArrow) {
-    'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vega'), require('apache-arrow')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'vega', 'apache-arrow'], factory) :
+    (global = global || self, factory((global.vega = global.vega || {}, global.vega.transforms = global.vega.transforms || {}, global.vega.transforms.arrow = {}), global.vega, global.apacheArrow));
+}(this, (function (exports, vega, apacheArrow) { 'use strict';
 
     // ReSharper disable TsResolvedFromInaccessibleModule
     // ReSharper disable QualifiedExpressionMaybeNull
@@ -147,6 +148,6 @@ this.vega.transforms.arrow = (function (exports, vega, apacheArrow) {
     exports.Slice = Slice;
     exports.register = register;
 
-    return exports;
+    Object.defineProperty(exports, '__esModule', { value: true });
 
-}({}, vega, apacheArrow));
+})));
