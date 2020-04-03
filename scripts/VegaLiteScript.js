@@ -87,7 +87,9 @@
                 vega.formats("arrow", vegaLoaderArrow);
             }
 
-            vegaArrowTransforms.register(vega);
+            if ("undefined" !== vega && "undefined" !== vegaArrowTransforms) {
+                vegaArrowTransforms.register(vega);
+            }
 
             if ("undefined" !== vega) {
                 window["vega"] = vega;
@@ -107,6 +109,10 @@
 
             if ("undefined" !== vegaLoaderArrow) {
                 window["vegaLoaderArrow"] = vegaLoaderArrow;
+            }
+
+            if ("undefined" !== vegaArrowTransforms) {
+                window["vegaArrowTransforms"] = vegaArrowTransforms;
             }
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
