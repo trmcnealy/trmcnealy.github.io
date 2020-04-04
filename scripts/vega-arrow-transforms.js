@@ -28,7 +28,7 @@
         return this._dataTable;
     };
     ArrowTransform.Definition = {
-        type: "arrow_transform",
+        type: "ArrowTransform",
         metadata: { changes: true, source: true },
         params: [
             { name: "filter", type: "Predicate" },

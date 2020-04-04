@@ -97,7 +97,7 @@
 
             if ("undefined" !== vega &&
                 "undefined" !== vegaArrowTransforms) {
-                vega.transforms["arrow_transform"] = vegaArrowTransforms;
+                vega.transforms["arrowtransform"] = vegaArrowTransforms;
             }
 
             if ("undefined" !== vega) {
