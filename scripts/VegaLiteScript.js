@@ -181,7 +181,7 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(async function(result) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
 
                     //const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
 
@@ -194,7 +194,7 @@
 
                     result.view.run();
 
-                    window.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
                             detail: {
                                 "d3Color": d3Color,
