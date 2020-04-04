@@ -183,21 +183,16 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(async function(result) {
 
-                    console.log("1");
                     const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
-                    console.log("2");
 
                     if (vegalite_spec.transform.some(has_arrow_transform) &&
                         "undefined" !== vega &&
                         "undefined" !== vegaArrowTransforms) {
-                        console.log("3");
 
-                        vegaArrowTransforms.DataTable(result.view.data);
+                        //vegaArrowTransforms.DataTable(result.view.data);
                     }
-                    console.log("4");
 
                     await result.view.runAsync();
-                    console.log("5");
 
                     global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
@@ -213,9 +208,7 @@
                             }
                         }
                     ));
-                    console.log("6");
                 });
-
             });
     };
 
