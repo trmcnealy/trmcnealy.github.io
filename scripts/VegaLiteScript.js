@@ -192,7 +192,7 @@
                         //vegaArrowTransforms.DataTable(result.view.data);
                     }
 
-                    await result.view.runAsync();
+                    result.view.run();
 
                     global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
