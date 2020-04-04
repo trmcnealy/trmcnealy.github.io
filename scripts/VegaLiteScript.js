@@ -95,11 +95,6 @@
                 vega.formats("arrow", vegaLoaderArrow);
             }
 
-            if ("undefined" !== vega &&
-                "undefined" !== vegaArrowTransforms) {
-                vega.transforms["arrowtransform"] = vegaArrowTransforms;
-            }
-
             if ("undefined" !== vega) {
                 window["vega"] = vega;
             }
@@ -125,6 +120,11 @@
             }
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
+
+            if ("undefined" !== vega &&
+                "undefined" !== vegaArrowTransforms) {
+                vega.transforms["arrowtransform"] = vegaArrowTransforms;
+            }
 
             var view = new vega.View(vega.parse(vgSpec))
                 .logLevel(vega.Error)
