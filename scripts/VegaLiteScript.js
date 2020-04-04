@@ -97,7 +97,7 @@
 
             if ("undefined" !== vega &&
                 "undefined" !== vegaArrowTransforms) {
-                vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                vega.transforms["arrow_transform"] = vegaArrowTransforms;
             }
 
             if ("undefined" !== vega) {
@@ -192,7 +192,7 @@
                         "undefined" !== vegaArrowTransforms) {
                         console.log("3");
 
-                        vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
+                        vegaArrowTransforms.DataTable(result.view.data);
                     }
                     console.log("4");
 
@@ -235,7 +235,7 @@
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
-                            vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
+                            vegaArrowTransforms.DataTable(result.view.data);
                         }
 
                         await result.view.runAsync();
@@ -282,7 +282,7 @@
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
-                            vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
+                            vegaArrowTransforms.DataTable(result.view.data);
                         }
 
                         await result.view.runAsync();
