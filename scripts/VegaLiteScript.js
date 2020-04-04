@@ -178,7 +178,9 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(async function(result) {
 
-                    if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                    const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
+
+                    if (vegalite_spec.transform.some(has_arrow_transform) &&
                         "undefined" !== vega &&
                         "undefined" !== vegaArrowTransforms) {
 
@@ -218,7 +220,9 @@
                         //result.view.data(variableName, csharpVariable);
                         result.view.data(variableName, csharpVariable);
 
-                        if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                        const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
+
+                        if (vegalite_spec.transform.some(has_arrow_transform) &&
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
@@ -265,7 +269,9 @@
 
                         result.view.data(variableName, data);
 
-                        if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                        const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
+
+                        if (vegalite_spec.transform.some(has_arrow_transform) &&
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
