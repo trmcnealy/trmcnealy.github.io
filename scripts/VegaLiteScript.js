@@ -26,7 +26,7 @@
             "vega-webgl": "https://cdn.jsdelivr.net/npm/vega-webgl-renderer?noext",
             "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
             "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
-            "vega-arrow-transforms":"https://trmcnealy.github.io/scripts/vega-arrow-transforms"
+            "vega-arrow-transforms": "https://trmcnealy.github.io/scripts/vega-arrow-transforms"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
     });
@@ -39,6 +39,11 @@
         let response = await fetch(`${rootUrl}variables/csharp/${variable}`, { method: "GET", cache: "no-cache", mode: "cors" });
         let variableBundle = await response.json();
         return variableBundle;
+    };
+
+    async function clientLoadArrowData(dataUrl) {
+        const response = await fetch(dataUrl);
+        return await response.arrayBuffer();
     };
 
     function copyDataToBuffer(id, csharpVariable, dataDims) {
@@ -88,10 +93,6 @@
 
             if ("undefined" !== vega && "undefined" !== vegaLoaderArrow) {
                 vega.formats("arrow", vegaLoaderArrow);
-            }
-
-            if ("undefined" !== vega && "undefined" !== vegaArrowTransforms) {
-                vega.transforms["arrow-transform"] = vegaArrowTransforms.ArrowTransform;
             }
 
             if ("undefined" !== vega) {
@@ -175,9 +176,18 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(async function(result) {
 
-                    result.view.run();
+                    if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                        "undefined" !== vega &&
+                        "undefined" !== vegaArrowTransforms) {
+
+                        ArrowTransform.DataTable(result.view.data);
+
+                        vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                    }
+
+                    await result.view.runAsync();
 
                     global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
@@ -203,12 +213,21 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
-                    GetVariable(variableName).then((csharpVariable) => {
+                    GetVariable(variableName).then(async (csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
                         result.view.data(variableName, csharpVariable);
 
-                        result.view.run();
+                        if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                            "undefined" !== vega &&
+                            "undefined" !== vegaArrowTransforms) {
+
+                            ArrowTransform.DataTable(result.view.data);
+
+                            vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                        }
+
+                        await result.view.runAsync();
 
                         global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                             {
@@ -226,7 +245,6 @@
                         ));
                     });
                 });
-
             });
     };
 
@@ -237,7 +255,7 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
-                    GetVariable(variableName).then((csharpVariable) => {
+                    GetVariable(variableName).then(async (csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
@@ -247,7 +265,16 @@
 
                         result.view.data(variableName, data);
 
-                        result.view.run();
+                        if ("undefined" !== vegalite_spec.transform.arrow_transform &&
+                            "undefined" !== vega &&
+                            "undefined" !== vegaArrowTransforms) {
+
+                            ArrowTransform.DataTable(result.view.data);
+
+                            vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                        }
+
+                        await result.view.runAsync();
 
                         global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                             {
@@ -265,12 +292,10 @@
                         ));
                     });
                 });
-
             });
     };
 
 }("undefined" != typeof window ? window : this);
-
 
 //function range(bind, el, param, value) {
 //    value = value !== undefined ? value : ((+param.max) + (+param.min)) / 2;
