@@ -91,14 +91,16 @@
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
 
+            console.log(undefined);
+ 
             if ("undefined" !== vega && "undefined" !== vegaLoaderArrow) {
                 vega.formats("arrow", vegaLoaderArrow);
             }
-
+console.log(undefined);
             if ("undefined" !== vega) {
                 window["vega"] = vega;
             }
-
+console.log(undefined);
             if ("undefined" !== vegaLite) {
                 window["vegaLite"] = vegaLite;
             }
@@ -114,7 +116,7 @@
             if ("undefined" !== vegaLoaderArrow) {
                 window["vegaLoaderArrow"] = vegaLoaderArrow;
             }
-
+console.log(undefined);
             if ("undefined" !== vegaArrowTransforms) {
                 window["vegaArrowTransforms"] = vegaArrowTransforms;
             }
@@ -125,13 +127,13 @@
                 "undefined" !== vegaArrowTransforms) {
                 vega.transforms["arrowtransform"] = vegaArrowTransforms;
             }
-
+console.log(undefined);
             var view = new vega.View(vega.parse(vgSpec))
                 .logLevel(vega.Error)
                 .initialize("#vis-" + `${id}`)
                 .renderer(view_render)
                 .hover();
-
+console.log(undefined);
             return new Promise((function*() {
                 return {
                     view: view,
@@ -182,7 +184,7 @@
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
-
+console.log(undefined);
                     //const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
 
                     //if (vegalite_spec.transform.some(has_arrow_transform) &&
