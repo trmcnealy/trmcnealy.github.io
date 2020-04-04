@@ -95,6 +95,11 @@
                 vega.formats("arrow", vegaLoaderArrow);
             }
 
+            if ("undefined" !== vega &&
+                "undefined" !== vegaArrowTransforms) {
+                vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+            }
+
             if ("undefined" !== vega) {
                 window["vega"] = vega;
             }
@@ -187,9 +192,7 @@
                         "undefined" !== vegaArrowTransforms) {
                         console.log("3");
 
-                        ArrowTransform.DataTable(result.view.data);
-
-                        vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                        vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
                     }
                     console.log("4");
 
@@ -232,9 +235,7 @@
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
-                            ArrowTransform.DataTable(result.view.data);
-
-                            vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                            vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
                         }
 
                         await result.view.runAsync();
@@ -281,9 +282,7 @@
                             "undefined" !== vega &&
                             "undefined" !== vegaArrowTransforms) {
 
-                            ArrowTransform.DataTable(result.view.data);
-
-                            vega.transforms["arrow_transform"] = vegaArrowTransforms.ArrowTransform;
+                            vegaArrowTransforms.ArrowTransform.DataTable(result.view.data);
                         }
 
                         await result.view.runAsync();
