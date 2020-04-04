@@ -183,18 +183,18 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(async function(result) {
 
-                    const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
+                    //const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
 
-                    if (vegalite_spec.transform.some(has_arrow_transform) &&
-                        "undefined" !== vega &&
-                        "undefined" !== vegaArrowTransforms) {
-
+                    //if (vegalite_spec.transform.some(has_arrow_transform) &&
+                    //    "undefined" !== vega &&
+                    //    "undefined" !== vegaArrowTransforms) {
+                    //
                         //vegaArrowTransforms.DataTable(result.view.data);
-                    }
+                    //}
 
                     result.view.run();
 
-                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    window.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
                             detail: {
                                 "d3Color": d3Color,
