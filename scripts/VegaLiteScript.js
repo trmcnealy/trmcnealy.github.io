@@ -184,8 +184,6 @@
 
                 view.run();
 
-                console.log(result);
-
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
                         detail: {
@@ -195,7 +193,7 @@
                             "vegaWebgl": vegaWebgl,
                             "apacheArrow": apacheArrow,
                             "vegaLoaderArrow": vegaLoaderArrow,
-                            "view": result
+                            "view": view
                         }
                     }
                 ));
@@ -206,15 +204,18 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
-                    GetVariable(variableName).then(async (csharpVariable) => {
 
-                        //result.view.data(variableName, csharpVariable);
-                        result.view.data(variableName, csharpVariable);
+                const result = renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
 
-                        await result.view.runAsync();
-                    });
+                const view = result.view;
+
+                GetVariable(variableName).then(async (csharpVariable) => {
+
+                    //result.view.data(variableName, csharpVariable);
+                    view.data(variableName, csharpVariable);
                 });
+
+                await result.view.runAsync();
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
@@ -224,7 +225,8 @@
                             "vegaLite": vegaLite,
                             "vegaWebgl": vegaWebgl,
                             "apacheArrow": apacheArrow,
-                            "vegaLoaderArrow": vegaLoaderArrow
+                            "vegaLoaderArrow": vegaLoaderArrow,
+                            "view": view
                         }
                     }
                 ));
@@ -237,20 +239,22 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
-                    GetVariable(variableName).then(async (csharpVariable) => {
+                const result = renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
 
-                        const data = copyDataToBuffer(id, csharpVariable, dataDims);
+                const view = result.view;
 
-                        // result.view.data(variableName, csharpVariable);
-                        // result.view._runtime.data[variableName].values = data;
-                        // result.view.data(variableName, data);
+                GetVariable(variableName).then(async (csharpVariable) => {
 
-                        result.view.data(variableName, data);
+                    const data = copyDataToBuffer(id, csharpVariable, dataDims);
 
-                        await result.view.runAsync();
-                    });
+                    // result.view.data(variableName, csharpVariable);
+                    // result.view._runtime.data[variableName].values = data;
+                    // result.view.data(variableName, data);
+
+                    view.data(variableName, data);
                 });
+
+                await result.view.runAsync();
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
@@ -260,7 +264,8 @@
                             "vegaLite": vegaLite,
                             "vegaWebgl": vegaWebgl,
                             "apacheArrow": apacheArrow,
-                            "vegaLoaderArrow": vegaLoaderArrow
+                            "vegaLoaderArrow": vegaLoaderArrow,
+                            "view": view
                         }
                     }
                 ));
