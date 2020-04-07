@@ -193,8 +193,7 @@
                             "vegaLite": vegaLite,
                             "vegaWebgl": vegaWebgl,
                             "apacheArrow": apacheArrow,
-                            "vegaLoaderArrow": vegaLoaderArrow,
-                            "view": result.view
+                            "vegaLoaderArrow": vegaLoaderArrow
                         }
                     }
                 ));
@@ -222,8 +221,7 @@
                                 "vegaLite": vegaLite,
                                 "vegaWebgl": vegaWebgl,
                                 "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow,
-                                "view": result.view
+                                "vegaLoaderArrow": vegaLoaderArrow
                             }
                         }
                     ));
@@ -259,8 +257,7 @@
                                 "vegaLite": vegaLite,
                                 "vegaWebgl": vegaWebgl,
                                 "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow,
-                                "view": result.view
+                                "vegaLoaderArrow": vegaLoaderArrow
                             }
                         }
                     ));
