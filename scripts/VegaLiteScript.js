@@ -170,11 +170,9 @@
     VegaLiteRendered = new CustomEvent("vega-lite-rendered");
 
     LoadApacheArrow = function(url) {
-        const arrow = require("apache-arrow");
-
         const buf = fetch(url).then(response => response.arrayBuffer());
 
-        return arrow.Table.from([new Uint8Array(buf)]);
+        return window["apacheArrow"].Table.from([new Uint8Array(buf)]);
     };
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
