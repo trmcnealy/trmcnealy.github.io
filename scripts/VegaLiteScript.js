@@ -181,7 +181,7 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(async function(result) {
 
-                    result.view.runAsync().then(async function (result) {
+                    result.view.runAsync().then(function (result) {
 
                         console.log(result);
 
