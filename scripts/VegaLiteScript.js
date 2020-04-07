@@ -186,21 +186,24 @@
                     return result.view;
                 });
 
-                console.log(view);
+                view.then(function (result) {
 
-                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                    {
-                        detail: {
-                            "d3Color": d3Color,
-                            "vega": vega,
-                            "vegaLite": vegaLite,
-                            "vegaWebgl": vegaWebgl,
-                            "apacheArrow": apacheArrow,
-                            "vegaLoaderArrow": vegaLoaderArrow,
-                            "view": view
+                    console.log(view);
+
+                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                        {
+                            detail: {
+                                "d3Color": d3Color,
+                                "vega": vega,
+                                "vegaLite": vegaLite,
+                                "vegaWebgl": vegaWebgl,
+                                "apacheArrow": apacheArrow,
+                                "vegaLoaderArrow": vegaLoaderArrow,
+                                "view": result
+                            }
                         }
-                    }
-                ));
+                    ));
+                });
             });
     };
 
