@@ -181,7 +181,9 @@
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
                 renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(async function(result) {
 
-                    result.view.runAsync().then(async function(result) {
+                    result.view.runAsync().then(async function (result) {
+
+                        console.log(result);
 
                         global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                             {
