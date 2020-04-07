@@ -179,26 +179,28 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
-
-                    window["view"] = result.view;
-
-                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                        {
-                            detail: {
-                                "d3Color": d3Color,
-                                "vega": vega,
-                                "vegaLite": vegaLite,
-                                "vegaWebgl": vegaWebgl,
-                                "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow,
-                                "view": result.view
-                            }
-                        }
-                    ));
+                const view = renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
                     result.view.run();
+
+                    return result.view;
                 });
+
+                console.log(view);
+
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow,
+                            "view": view
+                        }
+                    }
+                ));
             });
     };
 
