@@ -215,7 +215,7 @@
                     view.data(variableName, csharpVariable);
                 });
 
-                await result.view.runAsync();
+                result.view.runAsync();
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
@@ -254,7 +254,7 @@
                     view.data(variableName, data);
                 });
 
-                await result.view.runAsync();
+                result.view.runAsync();
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
