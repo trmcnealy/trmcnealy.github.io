@@ -182,7 +182,7 @@
 
                 const view = result.view;
 
-                view.run();
+                view.runAsync();
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
@@ -213,9 +213,9 @@
 
                     //result.view.data(variableName, csharpVariable);
                     view.data(variableName, csharpVariable);
-                });
 
-                result.view.runAsync();
+                    view.runAsync();
+                });
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
@@ -252,9 +252,9 @@
                     // result.view.data(variableName, data);
 
                     view.data(variableName, data);
-                });
 
-                result.view.runAsync();
+                    view.runAsync();
+                });
 
                 global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                     {
