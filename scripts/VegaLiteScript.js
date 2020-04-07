@@ -179,14 +179,11 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                const view = renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
-                    result.view.run();
+                    const view = result.view;
 
-                    return result.view;
-                });
-
-                view.then(function (result) {
+                    view.run();
 
                     console.log(result);
 
@@ -203,6 +200,7 @@
                             }
                         }
                     ));
+
                 });
             });
     };
