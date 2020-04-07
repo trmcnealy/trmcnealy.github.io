@@ -183,20 +183,21 @@
 
                     result.view.run();
 
-                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                        {
-                            detail: {
-                                "d3Color": d3Color,
-                                "vega": vega,
-                                "vegaLite": vegaLite,
-                                "vegaWebgl": vegaWebgl,
-                                "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow,
-                                "view": result.view
-                            }
-                        }
-                    ));
                 });
+
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow,
+                            "view": result.view
+                        }
+                    }
+                ));
             });
     };
 
@@ -211,21 +212,21 @@
                         result.view.data(variableName, csharpVariable);
 
                         await result.view.runAsync();
-
-                        global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                            {
-                                detail: {
-                                    "d3Color": d3Color,
-                                    "vega": vega,
-                                    "vegaLite": vegaLite,
-                                    "vegaWebgl": vegaWebgl,
-                                    "apacheArrow": apacheArrow,
-                                    "vegaLoaderArrow": vegaLoaderArrow,
-                                    "view": result.view
-                                }
-                            }
-                        ));
                     });
+
+                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                        {
+                            detail: {
+                                "d3Color": d3Color,
+                                "vega": vega,
+                                "vegaLite": vegaLite,
+                                "vegaWebgl": vegaWebgl,
+                                "apacheArrow": apacheArrow,
+                                "vegaLoaderArrow": vegaLoaderArrow,
+                                "view": result.view
+                            }
+                        }
+                    ));
                 });
             });
     };
@@ -248,21 +249,21 @@
                         result.view.data(variableName, data);
 
                         await result.view.runAsync();
-
-                        global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                            {
-                                detail: {
-                                    "d3Color": d3Color,
-                                    "vega": vega,
-                                    "vegaLite": vegaLite,
-                                    "vegaWebgl": vegaWebgl,
-                                    "apacheArrow": apacheArrow,
-                                    "vegaLoaderArrow": vegaLoaderArrow,
-                                    "view": result.view
-                                }
-                            }
-                        ));
                     });
+
+                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                        {
+                            detail: {
+                                "d3Color": d3Color,
+                                "vega": vega,
+                                "vegaLite": vegaLite,
+                                "vegaWebgl": vegaWebgl,
+                                "apacheArrow": apacheArrow,
+                                "vegaLoaderArrow": vegaLoaderArrow,
+                                "view": result.view
+                            }
+                        }
+                    ));
                 });
             });
     };
