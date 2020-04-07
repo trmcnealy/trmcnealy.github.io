@@ -25,8 +25,7 @@
             "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite?noext",
             "vega-webgl": "https://cdn.jsdelivr.net/npm/vega-webgl-renderer?noext",
             "apache-arrow": "https://cdn.jsdelivr.net/npm/apache-arrow?noext",
-            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext",
-            "vega-arrow-transforms": "https://trmcnealy.github.io/scripts/vega-arrow-transforms"
+            "vega-loader-arrow": "https://cdn.jsdelivr.net/npm/vega-loader-arrow?noext"
         },
         map: { '*': { 'vega-scenegraph': "vega" } }
     });
@@ -82,7 +81,7 @@
     }
 
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) => {
+        return async(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -113,15 +112,6 @@
 
             if ("undefined" !== vegaLoaderArrow) {
                 window["vegaLoaderArrow"] = vegaLoaderArrow;
-            }
-
-            if ("undefined" !== vegaArrowTransforms) {
-                window["vegaArrowTransforms"] = vegaArrowTransforms;
-            }
-
-            if ("undefined" !== vega &&
-                "undefined" !== vegaArrowTransforms) {
-                vega.transforms["arrowtransform"] = vegaArrowTransforms;
             }
 
             const vgSpec = vegaLite.compile(vlSpec).spec;
@@ -181,18 +171,9 @@
 
     RequireVegaLite = function(id, vegalite_spec, view_render) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
-
-                    //const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
-
-                    //if (vegalite_spec.transform.some(has_arrow_transform) &&
-                    //    "undefined" !== vega &&
-                    //    "undefined" !== vegaArrowTransforms) {
-                    //
-                        //vegaArrowTransforms.DataTable(result.view.data);
-                    //}
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
 
                     result.view.run();
 
@@ -205,7 +186,6 @@
                                 "vegaWebgl": vegaWebgl,
                                 "apacheArrow": apacheArrow,
                                 "vegaLoaderArrow": vegaLoaderArrow,
-                                "vegaArrowTransforms": vegaArrowTransforms,
                                 "view": result.view
                             }
                         }
@@ -216,23 +196,14 @@
 
     RequireVegaLiteData = function(id, vegalite_spec, view_render, variableName) {
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then(async (csharpVariable) => {
 
                         //result.view.data(variableName, csharpVariable);
                         result.view.data(variableName, csharpVariable);
-
-                        const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
-
-                        if (vegalite_spec.transform.some(has_arrow_transform) &&
-                            "undefined" !== vega &&
-                            "undefined" !== vegaArrowTransforms) {
-
-                            vegaArrowTransforms.DataTable(result.view.data);
-                        }
-
+                        
                         await result.view.runAsync();
 
                         global.dispatchEvent(new CustomEvent("vega-lite-rendered",
@@ -244,7 +215,6 @@
                                     "vegaWebgl": vegaWebgl,
                                     "apacheArrow": apacheArrow,
                                     "vegaLoaderArrow": vegaLoaderArrow,
-                                    "vegaArrowTransforms": vegaArrowTransforms,
                                     "view": result.view
                                 }
                             }
@@ -258,9 +228,9 @@
 
         const dataDims = Dims(rows, columns);
 
-        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow", "vega-arrow-transforms"],
-            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms) {
-                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow, vegaArrowTransforms).then(function(result) {
+        vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
+            function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+                renderVegaLite(id, vegalite_spec, "webgl")(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
                     GetVariable(variableName).then(async (csharpVariable) => {
 
                         const data = copyDataToBuffer(id, csharpVariable, dataDims);
@@ -270,15 +240,6 @@
                         // result.view.data(variableName, data);
 
                         result.view.data(variableName, data);
-
-                        const has_arrow_transform = (element) => "undefined" !== element.arrow_transform;
-
-                        if (vegalite_spec.transform.some(has_arrow_transform) &&
-                            "undefined" !== vega &&
-                            "undefined" !== vegaArrowTransforms) {
-
-                            vegaArrowTransforms.DataTable(result.view.data);
-                        }
 
                         await result.view.runAsync();
 
@@ -291,7 +252,6 @@
                                     "vegaWebgl": vegaWebgl,
                                     "apacheArrow": apacheArrow,
                                     "vegaLoaderArrow": vegaLoaderArrow,
-                                    "vegaArrowTransforms": vegaArrowTransforms,
                                     "view": result.view
                                 }
                             }
