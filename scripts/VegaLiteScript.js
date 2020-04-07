@@ -188,7 +188,7 @@
 
                 view.then(function (result) {
 
-                    console.log(view);
+                    console.log(result);
 
                     global.dispatchEvent(new CustomEvent("vega-lite-rendered",
                         {
