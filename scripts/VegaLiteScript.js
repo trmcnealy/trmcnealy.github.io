@@ -172,7 +172,7 @@
     LoadApacheArrow = function(url) {
         const arrow = require("apache-arrow");
 
-        const buf = await fetch(url).then(response => response.arrayBuffer());
+        const buf = fetch(url).then(response => response.arrayBuffer());
 
         return arrow.Table.from([new Uint8Array(buf)]);
     };
