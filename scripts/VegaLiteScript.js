@@ -167,7 +167,7 @@
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
 
-    VegaLiteRendered = new Event("vega-lite-rendered");
+    VegaLiteRendered = new CustomEvent("vega-lite-rendered");
 
     LoadApacheArrow = function(url) {
         const arrow = require("apache-arrow");
