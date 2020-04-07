@@ -1,4 +1,4 @@
-﻿var RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded, VegaLiteRendered;
+﻿var LoadApacheArrow, RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded, VegaLiteRendered;
 
 !function(global) {
 
@@ -89,7 +89,7 @@
             //    logLevel: vegaEmbed.Info
             //};
             // return vegaEmbed("#vis-" + `${id}`, vlSpec, opt);
- 
+
             if ("undefined" !== vega && "undefined" !== vegaLoaderArrow) {
                 vega.formats("arrow", vegaLoaderArrow);
             }
@@ -117,7 +117,7 @@
             const vgSpec = vegaLite.compile(vlSpec).spec;
 
             const runtime = vega.parse(vgSpec);
-            
+
             var view = new vega.View(runtime)
                 .logLevel(vega.Error)
                 .initialize("#vis-" + `${id}`)
@@ -169,6 +169,14 @@
 
     VegaLiteRendered = new Event("vega-lite-rendered");
 
+    LoadApacheArrow = function(url) {
+        const arrow = require("apache-arrow");
+
+        const buf = await fetch(url).then(response => response.arrayBuffer());
+
+        return arrow.Table.from([new Uint8Array(buf)]);
+    };
+
     RequireVegaLite = function(id, vegalite_spec, view_render) {
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
@@ -203,7 +211,7 @@
 
                         //result.view.data(variableName, csharpVariable);
                         result.view.data(variableName, csharpVariable);
-                        
+
                         await result.view.runAsync();
 
                         global.dispatchEvent(new CustomEvent("vega-lite-rendered",
