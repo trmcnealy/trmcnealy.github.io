@@ -81,7 +81,7 @@
     }
 
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
+        return async function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -179,7 +179,9 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function(result) {
+                const render = renderVegaLite(id, vegalite_spec, view_render);
+
+                render(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function (result) {
 
                     const view = result.view;
 
