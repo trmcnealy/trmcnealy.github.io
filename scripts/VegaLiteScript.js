@@ -191,7 +191,8 @@
                                 "vegaLite": vegaLite,
                                 "vegaWebgl": vegaWebgl,
                                 "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow
+                                "vegaLoaderArrow": vegaLoaderArrow,
+                                "view": result.view
                             }
                         }
                     ));
