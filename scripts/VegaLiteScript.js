@@ -81,7 +81,7 @@
     }
 
     function renderVegaLite(id, vegalite_spec, view_render) {
-        return async function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
+        return (d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) => {
             const vlSpec = vegalite_spec;
 
             // const opt = {
@@ -124,13 +124,11 @@
                 .renderer(view_render)
                 .hover();
 
-            return new Promise((function*() {
-                return {
-                    view: view,
-                    spec: vlSpec,
-                    vgSpec: vgSpec
-                };
-            }));
+            return {
+                "view": view,
+                "spec": vlSpec,
+                "vgSpec": vgSpec
+            };
         };
     }
 
@@ -179,31 +177,28 @@
 
         vega_require(["d3-color", "vega", "vega-lite", "vega-webgl", "apache-arrow", "vega-loader-arrow"],
             function(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow) {
-                const render = renderVegaLite(id, vegalite_spec, view_render);
 
-                render(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow).then(function (result) {
+                const result = renderVegaLite(id, vegalite_spec, view_render)(d3Color, vega, vegaLite, vegaWebgl, apacheArrow, vegaLoaderArrow);
 
-                    const view = result.view;
+                const view = result.view;
 
-                    view.run();
+                view.run();
 
-                    console.log(result);
+                console.log(result);
 
-                    global.dispatchEvent(new CustomEvent("vega-lite-rendered",
-                        {
-                            detail: {
-                                "d3Color": d3Color,
-                                "vega": vega,
-                                "vegaLite": vegaLite,
-                                "vegaWebgl": vegaWebgl,
-                                "apacheArrow": apacheArrow,
-                                "vegaLoaderArrow": vegaLoaderArrow,
-                                "view": result
-                            }
+                global.dispatchEvent(new CustomEvent("vega-lite-rendered",
+                    {
+                        detail: {
+                            "d3Color": d3Color,
+                            "vega": vega,
+                            "vegaLite": vegaLite,
+                            "vegaWebgl": vegaWebgl,
+                            "apacheArrow": apacheArrow,
+                            "vegaLoaderArrow": vegaLoaderArrow,
+                            "view": result
                         }
-                    ));
-
-                });
+                    }
+                ));
             });
     };
 
