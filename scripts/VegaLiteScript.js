@@ -1,4 +1,4 @@
-﻿var LoadApacheArrow, RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded, VegaLiteRendered;
+﻿var LoadApacheArrow, RequireVegaLite, RequireVegaLiteData, RequireVegaLiteDataBuffered, VegaLiteLoaded;
 
 !function(global) {
 
@@ -167,7 +167,7 @@
 
     VegaLiteLoaded = new Event("vega-lite-loaded");
 
-    VegaLiteRendered = new CustomEvent("vega-lite-rendered");
+    //VegaLiteRendered = new CustomEvent("vega-lite-rendered");
 
     LoadApacheArrow = function(url) {
         const buf = fetch(url).then(response => response.arrayBuffer());
