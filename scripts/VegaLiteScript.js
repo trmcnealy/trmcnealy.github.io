@@ -17,7 +17,7 @@
     let vega_require = global.requirejs.config({
         context: "vega",
         paths: {
-            "d3-color": "https://d3js.org/d3-color.v1.min",
+            "d3-color": "https://cdn.jsdelivr.net/npm/d3-color?noext",
             "vega-util": "https://cdn.jsdelivr.net/npm/vega-util?noext",
             "vega-loader": "https://cdn.jsdelivr.net/npm/vega-loader?noext",
             "vega-dataflow": "https://cdn.jsdelivr.net/npm/vega-dataflow?noext",
