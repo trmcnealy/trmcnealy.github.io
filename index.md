@@ -9,17 +9,17 @@ title: Projects
 ### Texas RRC
 Showing Wellbore locations for 300,000 out of 695,721
 <a href="https://github.com/trmcnealy/OilGas.Data">
-	<img src="assets/DataMiningTexasRRC.Extent.png" width="100%" height="100%">
+	<img src="Assets/DataMiningTexasRRC.Extent.png" width="100%" height="100%">
 </a>
 
 Oil Api
 <a href="https://github.com/trmcnealy/OilGas.Data">
-	<img src="assets/DataMiningTexasRRC.OilApi.png" width="100%" height="100%">
+	<img src="Assets/DataMiningTexasRRC.OilApi.png" width="100%" height="100%">
 </a>
 
 Gas S.G.
 <a href="https://github.com/trmcnealy/OilGas.Data">
-	<img src="assets/DataMiningTexasRRC.GasSG.png" width="100%" height="100%">
+	<img src="Assets/DataMiningTexasRRC.GasSG.png" width="100%" height="100%">
 </a>
 
 ---
