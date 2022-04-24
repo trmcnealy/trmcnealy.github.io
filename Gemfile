@@ -5,7 +5,7 @@ source "https://rubygems.org"
 
 gem "minima", "~> 2.5"
 
-gem "nokogiri", ">= 1.12.5"
+gem "nokogiri", ">= 1.13.4"
 
 gem "github-pages", group: :jekyll_plugins
 
