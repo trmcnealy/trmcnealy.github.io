@@ -182,4 +182,4 @@ https://www.swpshortcourse.org/papers?combine=Multi-Porosity+Modeling+for+Unconv
 Eagle Scout, Troop 175, Midland, TX, 1998 , https://www.westtexasscoutinghistory.net/award_eagle_btc.html
 
 
-[ResumeforMcNealyTimothy.pdf](http://trmcnealy.github.io/docs/ResumeforMcNealyTimothy.pdf)
+[ResumeforMcNealyTimothy.pdf](https://trmcnealy.github.io/Docs/ResumeforMcNealyTimothy.pdf)
